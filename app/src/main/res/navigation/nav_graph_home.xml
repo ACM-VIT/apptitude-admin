@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_home"
+    app:startDestination="@id/participants">
+
+    <fragment
+        android:id="@+id/advanced"
+        android:name="com.benrostudios.apptitudeadmin.ui.home.advanced.Advanced"
+        android:label="advanced_fragment"
+        tools:layout="@layout/advanced_fragment" />
+    <fragment
+        android:id="@+id/participants"
+        android:name="com.benrostudios.apptitudeadmin.ui.home.participants.Participants"
+        android:label="participants_fragment"
+        tools:layout="@layout/participants_fragment" />
+    <fragment
+        android:id="@+id/teams"
+        android:name="com.benrostudios.apptitudeadmin.ui.home.teams.Teams"
+        android:label="teams_fragment"
+        tools:layout="@layout/teams_fragment" />
+</navigation>
