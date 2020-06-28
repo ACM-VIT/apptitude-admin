@@ -14,6 +14,8 @@ class FetchDetailsImpl : FetchDetails {
     private val _teamsList = MutableLiveData<List<Team>>()
     private lateinit var databaseReference: DatabaseReference
 
+
+    @Suppress("Unchecked_cast")
     override suspend fun fetchParticipants() {
         databaseReference = Firebase.database.getReference("/participants")
         val participantFetcher = object : ValueEventListener{
@@ -21,12 +23,16 @@ class FetchDetailsImpl : FetchDetails {
                 TODO("Not yet implemented")
             }
             override fun onDataChange(snapshot: DataSnapshot) {
-
+                if(snapshot.exists()){
+                    val participantsList:List<Participant>? = snapshot.value as List<Participant> ?: emptyList()
+                    _participantsList.postValue(participantsList)
+                }
             }
         }
         databaseReference.addValueEventListener(participantFetcher)
     }
 
+    @Suppress("Unchecked_cast")
     override suspend fun fetchTeams() {
         databaseReference = Firebase.database.getReference("/teams")
         val teamsFetcher = object : ValueEventListener{
@@ -35,7 +41,10 @@ class FetchDetailsImpl : FetchDetails {
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                TODO("Not yet implemented")
+                if(snapshot.exists()){
+                    val teamsList:List<Team>? = snapshot.value as List<Team> ?: emptyList()
+                    _teamsList.postValue(teamsList)
+                }
             }
 
         }

@@ -6,9 +6,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import com.benrostudios.apptitudeadmin.R
+import com.benrostudios.apptitudeadmin.ui.base.ScopedFragment
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.x.closestKodein
+import org.kodein.di.generic.instance
 
-class Participants : Fragment() {
+class Participants : ScopedFragment(),KodeinAware {
+
+    override val kodein: Kodein by closestKodein()
+    private val viewModelFactory: ParticipantViewModelFactory by instance()
 
     companion object {
         fun newInstance() = Participants()
@@ -25,7 +34,7 @@ class Participants : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(ParticipantsViewModel::class.java)
+        viewModel = ViewModelProvider(this,viewModelFactory).get(ParticipantsViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
