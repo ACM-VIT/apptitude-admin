@@ -9,8 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.benrostudios.apptitudeadmin.R
+import com.benrostudios.apptitudeadmin.adapters.ParticipantAdapter
 import com.benrostudios.apptitudeadmin.ui.base.ScopedFragment
+import kotlinx.android.synthetic.main.participants_fragment.*
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -21,6 +24,7 @@ class Participants : ScopedFragment(), KodeinAware {
 
     override val kodein: Kodein by closestKodein()
     private val viewModelFactory: ParticipantViewModelFactory by instance()
+    private lateinit var adapter: ParticipantAdapter
 
     companion object {
         fun newInstance() = Participants()
@@ -39,12 +43,15 @@ class Participants : ScopedFragment(), KodeinAware {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory).get(ParticipantsViewModel::class.java)
         fetchParticipants()
+        participants_recyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
 
     fun fetchParticipants() = launch {
         viewModel.fetchParticipants()
         viewModel.participantsList.observe(viewLifecycleOwner, Observer {
             Log.d("Participants", "$it")
+            adapter = ParticipantAdapter(it)
+            participants_recyclerView.adapter = adapter
         })
     }
 
