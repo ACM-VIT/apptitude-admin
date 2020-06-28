@@ -17,15 +17,20 @@ class FetchDetailsImpl : FetchDetails {
 
     @Suppress("Unchecked_cast")
     override suspend fun fetchParticipants() {
+        val _participants: MutableList<Participant> = mutableListOf()
         databaseReference = Firebase.database.getReference("/participants")
-        val participantFetcher = object : ValueEventListener{
+        val participantFetcher = object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
+
             override fun onDataChange(snapshot: DataSnapshot) {
-                if(snapshot.exists()){
-                    val participantsList:List<Participant>? = snapshot.value as List<Participant> ?: emptyList()
-                    _participantsList.postValue(participantsList)
+                if (snapshot.exists()) {
+                    for (x in snapshot.children) {
+                        val participant = x.getValue(Participant::class.java)
+                        participant?.let { _participants.add(it) }
+                    }
+                    _participantsList.postValue(_participants)
                 }
             }
         }
@@ -34,16 +39,20 @@ class FetchDetailsImpl : FetchDetails {
 
     @Suppress("Unchecked_cast")
     override suspend fun fetchTeams() {
+        val _teams: MutableList<Team> = mutableListOf()
         databaseReference = Firebase.database.getReference("/teams")
-        val teamsFetcher = object : ValueEventListener{
+        val teamsFetcher = object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                if(snapshot.exists()){
-                    val teamsList:List<Team>? = snapshot.value as List<Team> ?: emptyList()
-                    _teamsList.postValue(teamsList)
+                if (snapshot.exists()) {
+                    for(x in snapshot.children){
+                        val team = x.getValue(Team::class.java)
+                        team?.let { _teams.add(it) }
+                    }
+                    _teamsList.postValue(_teams)
                 }
             }
 
