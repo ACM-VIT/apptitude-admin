@@ -7,11 +7,13 @@ import com.benrostudios.apptitudeadmin.data.models.Team
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import java.time.temporal.ValueRange
 
 class FetchDetailsImpl : FetchDetails {
 
     private val _participantsList = MutableLiveData<List<Participant>>()
     private val _teamsList = MutableLiveData<List<Team>>()
+    private val _teamDetails = MutableLiveData<Team>()
     private lateinit var databaseReference: DatabaseReference
 
 
@@ -60,8 +62,28 @@ class FetchDetailsImpl : FetchDetails {
         databaseReference.addListenerForSingleValueEvent(teamsFetcher)
     }
 
+    override suspend fun fetchTeamDetails(teamId: String) {
+        databaseReference = Firebase.database.getReference("teams/$teamId")
+        val teamDetailFetcher = object : ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    val teamDetails = snapshot.getValue(Team::class.java)
+                    _teamDetails.postValue(teamDetails)
+                }
+            }
+
+        }
+        databaseReference.addListenerForSingleValueEvent(teamDetailFetcher)
+    }
+
     override val participantList: LiveData<List<Participant>>
         get() = _participantsList
     override val teamsList: LiveData<List<Team>>
         get() = _teamsList
+    override val teamDetails: LiveData<Team>
+        get() = _teamDetails
 }

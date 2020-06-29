@@ -8,6 +8,8 @@ import java.lang.invoke.CallSite
 interface FetchDetails {
     suspend fun fetchParticipants()
     suspend fun fetchTeams()
+    suspend fun fetchTeamDetails(teamId: String)
     val participantList: LiveData<List<Participant>>
     val teamsList: LiveData<List<Team>>
+    val teamDetails: LiveData<Team>
 }

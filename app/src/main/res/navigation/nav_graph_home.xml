@@ -14,10 +14,28 @@
         android:id="@+id/participants"
         android:name="com.benrostudios.apptitudeadmin.ui.home.participants.Participants"
         android:label="participants_fragment"
-        tools:layout="@layout/participants_fragment" />
+        tools:layout="@layout/participants_fragment" >
+        <action
+            android:id="@+id/action_participants_to_participantDetails"
+            app:destination="@id/participantDetails" />
+    </fragment>
     <fragment
         android:id="@+id/teams"
         android:name="com.benrostudios.apptitudeadmin.ui.home.teams.Teams"
         android:label="teams_fragment"
-        tools:layout="@layout/teams_fragment" />
+        tools:layout="@layout/teams_fragment" >
+        <action
+            android:id="@+id/action_teams_to_teamDetails"
+            app:destination="@id/teamDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/participantDetails"
+        android:name="com.benrostudios.apptitudeadmin.ui.home.participantDetails.ParticipantDetails"
+        android:label="participant_details_fragment"
+        tools:layout="@layout/participant_details_fragment" />
+    <fragment
+        android:id="@+id/teamDetails"
+        android:name="com.benrostudios.apptitudeadmin.ui.home.teamDetails.TeamDetails"
+        android:label="team_details_fragment"
+        tools:layout="@layout/team_details_fragment" />
 </navigation>
