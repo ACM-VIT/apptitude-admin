@@ -1,9 +1,7 @@
 package com.benrostudios.apptitudeadmin.ui.home.participants
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.benrostudios.apptitudeadmin.R
 import com.benrostudios.apptitudeadmin.adapters.ParticipantAdapter
 import com.benrostudios.apptitudeadmin.ui.base.ScopedFragment
+import com.benrostudios.apptitudeadmin.utils.hide
+import com.benrostudios.apptitudeadmin.utils.show
 import kotlinx.android.synthetic.main.participants_fragment.*
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
@@ -44,14 +44,36 @@ class Participants : ScopedFragment(), KodeinAware {
         viewModel = ViewModelProvider(this, viewModelFactory).get(ParticipantsViewModel::class.java)
         fetchParticipants()
         participants_recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        participantSearchViewImplementation()
     }
 
     fun fetchParticipants() = launch {
         viewModel.fetchParticipants()
         viewModel.participantsList.observe(viewLifecycleOwner, Observer {
             Log.d("Participants", "$it")
-            adapter = ParticipantAdapter(it)
+            adapter = ParticipantAdapter(it.toMutableList())
             participants_recyclerView.adapter = adapter
+        })
+    }
+
+    fun participantSearchViewImplementation(){
+        participant_searchView.onActionViewCollapsed()
+        participant_searchView.setOnCloseListener {
+            participant_title.show()
+            false
+        }
+        participant_searchView.setOnSearchClickListener {
+            participant_title.hide()
+        }
+        participant_searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter.filter(newText)
+                return true
+            }
         })
     }
 

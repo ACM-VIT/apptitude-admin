@@ -17,7 +17,9 @@
         tools:layout="@layout/participants_fragment" >
         <action
             android:id="@+id/action_participants_to_participantDetails"
-            app:destination="@id/participantDetails" />
+            app:destination="@id/participantDetails"
+            app:launchSingleTop="true"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/teams"

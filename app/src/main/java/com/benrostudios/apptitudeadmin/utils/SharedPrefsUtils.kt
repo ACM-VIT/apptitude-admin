@@ -1,4 +1,4 @@
-package com.benrostudios.apptitudeadmin.internal
+package com.benrostudios.apptitudeadmin.utils
 
 import android.content.Context
 import android.content.SharedPreferences

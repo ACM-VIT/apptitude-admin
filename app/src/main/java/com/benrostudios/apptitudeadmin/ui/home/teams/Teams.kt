@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.benrostudios.apptitudeadmin.R
 import com.benrostudios.apptitudeadmin.adapters.TeamsAdapter
 import com.benrostudios.apptitudeadmin.ui.base.ScopedFragment
+import com.benrostudios.apptitudeadmin.utils.hide
+import com.benrostudios.apptitudeadmin.utils.show
+import kotlinx.android.synthetic.main.participants_fragment.*
 import kotlinx.android.synthetic.main.teams_fragment.*
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
@@ -41,6 +44,7 @@ class Teams : ScopedFragment(),KodeinAware {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this,viewModelFactoy).get(TeamsViewModel::class.java)
         fetchTeams()
+        teamsSearchViewImplementation()
         teams_recyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
 
@@ -52,5 +56,28 @@ class Teams : ScopedFragment(),KodeinAware {
             teams_recyclerView.adapter = adapter
         })
     }
+
+    fun teamsSearchViewImplementation(){
+        teams_searchView.onActionViewCollapsed()
+        teams_searchView.setOnCloseListener {
+            teams_title.show()
+            false
+        }
+        teams_searchView.setOnSearchClickListener {
+            teams_title.hide()
+        }
+        teams_searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                adapter.filter.filter(newText)
+                return true
+            }
+        })
+    }
+
+
 
 }

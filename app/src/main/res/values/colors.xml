@@ -8,4 +8,5 @@
     <color name="lightBlue">#1E9AFF</color>
     <color name="white">#FFF</color>
     <color name="statusBar">#3A44A1</color>
+    <color name="red">#d32f2f</color>
 </resources>
