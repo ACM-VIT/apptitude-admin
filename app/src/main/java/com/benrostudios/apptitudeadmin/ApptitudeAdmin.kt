@@ -11,6 +11,7 @@ import com.benrostudios.apptitudeadmin.ui.home.participants.ParticipantViewModel
 import com.benrostudios.apptitudeadmin.ui.home.teams.TeamsViewModelFactoy
 import com.benrostudios.apptitudeadmin.utils.SharedPrefsUtils
 import com.google.android.gms.common.util.SharedPreferencesUtils
+import com.ieeevit.gakko.ui.splash.SplashViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule
@@ -29,5 +30,6 @@ class ApptitudeAdmin : Application(), KodeinAware {
         bind() from provider { ParticipantViewModelFactory(instance()) }
         bind() from provider { VerificationViewModelFactory(instance()) }
         bind() from provider { ProfileViewModelFactory(instance()) }
+        bind() from provider { SplashViewModelFactory(instance()) }
     }
 }

@@ -73,5 +73,6 @@ class AuthRepositoryImpl : AuthRepository {
             }
 
         }
+        firebaseDatabase.addListenerForSingleValueEvent(userFetcher)
     }
 }

@@ -17,6 +17,7 @@ import androidx.navigation.Navigation
 import com.benrostudios.apptitudeadmin.R
 import com.benrostudios.apptitudeadmin.ui.base.ScopedFragment
 import com.benrostudios.apptitudeadmin.utils.SharedPrefsUtils
+import com.benrostudios.apptitudeadmin.utils.hide
 import com.benrostudios.apptitudeadmin.utils.shortToaster
 import com.benrostudios.apptitudeadmin.utils.show
 import com.google.android.gms.common.util.SharedPreferencesUtils
@@ -157,6 +158,7 @@ class Verification : ScopedFragment(), KodeinAware {
                 navController.navigate(R.id.action_verification_to_profile)
             }else{
                 Snackbar.make(otp_verify_btn,"Verification Failure",Snackbar.LENGTH_LONG).show()
+                verfication_progress.hide()
             }
         })
     }
