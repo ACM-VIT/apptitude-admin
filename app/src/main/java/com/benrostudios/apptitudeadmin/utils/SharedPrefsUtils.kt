@@ -19,8 +19,9 @@ class SharedPrefsUtils(
         const val SHARED_PREFERENCE_ADMIN = "admin"
     }
 
-    fun saveAdminLevel(level: Int) = editor.putInt(SHARED_PREFERENCE_ADMIN,level).commit()
-    fun retrieveAdminLevel(): Int? = sharedPreferences.getInt(SHARED_PREFERENCE_ADMIN,2)
+    fun saveAdminLevel(level: Int) = editor.putInt(SHARED_PREFERENCE_ADMIN, level).commit()
+    fun retrieveAdminLevel(): Int? = sharedPreferences.getInt(SHARED_PREFERENCE_ADMIN, 2)
     fun saveMobile(mobile: String) = editor.putString(SHARED_PREFERENCE_MOBILE, mobile).commit()
     fun retrieveMobile(): String? = sharedPreferences.getString(SHARED_PREFERENCE_MOBILE, "")
+    fun nukeSharedPrefs() = editor.clear().commit()
 }

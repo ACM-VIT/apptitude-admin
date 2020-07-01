@@ -9,4 +9,5 @@ interface AuthRepository {
     val getAuthStatus: LiveData<Boolean>
     suspend fun registerUser(user: Admin)
     val getRegisterStatus: LiveData<Boolean>
+    suspend fun getUser(phone: String)
 }

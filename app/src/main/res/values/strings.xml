@@ -4,4 +4,18 @@
     <string name="teams_title">Teams</string>
     <string name="advanced_title">Advanced</string>
     <string name="search_hint">Type Something</string>
+
+    //OTP input
+    <string name="phoneNumber">Phone Number</string>
+    <string name="phoneNumberDesc">We will send an OTP to this number for confirmation!</string>
+    <string name="continue_btn">Continue</string>
+    
+    //Verification
+    <string name="verificationTitle">Verification</string>
+    <string name="enter_otp">Please Enter the OTP you have received</string>
+
+    //Profile
+    <string name="profile">Profile</string>
+    <string name="profile_desc">Tell us your name and the power shall be yours!</string>
+    <string name="note">Remember , with great power comes great responsibility!</string>
 </resources>

@@ -7,7 +7,10 @@ import com.benrostudios.apptitudeadmin.data.models.Admin
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
 import com.google.firebase.auth.PhoneAuthCredential
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 
@@ -17,6 +20,7 @@ class AuthRepositoryImpl : AuthRepository {
     private lateinit var firebaseDatabase: DatabaseReference
     private val _authResponse = MutableLiveData<Boolean>()
     private val _registerResponse = MutableLiveData<Boolean>()
+
 
 
     override suspend fun signIn(credential: PhoneAuthCredential) {
@@ -40,7 +44,7 @@ class AuthRepositoryImpl : AuthRepository {
         get() = _authResponse
 
     override suspend fun registerUser(user: Admin) {
-        firebaseDatabase = Firebase.database.getReference("/users")
+        firebaseDatabase = Firebase.database.getReference("/admins")
         firebaseDatabase.child(user.phone).setValue(user).addOnCompleteListener {
             if(it.isSuccessful){
                 _registerResponse.postValue(true)
@@ -52,4 +56,22 @@ class AuthRepositoryImpl : AuthRepository {
 
     override val getRegisterStatus: LiveData<Boolean>
         get() = _registerResponse
+
+    override suspend fun getUser(phone: String) {
+        firebaseDatabase = Firebase.database.getReference("/admins/$phone")
+        var userFetcher = object : ValueEventListener{
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if(snapshot.exists()){
+                    _registerResponse.postValue(true)
+                }else{
+                    _registerResponse.postValue(false)
+                }
+            }
+
+        }
+    }
 }

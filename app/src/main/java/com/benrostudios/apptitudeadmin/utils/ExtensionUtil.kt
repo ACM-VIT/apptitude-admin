@@ -13,3 +13,10 @@ fun View.show(){
 fun Context.shortToaster(message: String){
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
+
+fun CharSequence.isValidMobile(): Boolean{
+    if(android.util.Patterns.PHONE.matcher(this).matches()){
+        return true
+    }
+    return false
+}
