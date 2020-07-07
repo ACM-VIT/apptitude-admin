@@ -5,6 +5,10 @@
     <string name="advanced_title">Advanced</string>
     <string name="search_hint">Type Something</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="send_notification">Send Notification</string>
+    <string name="notification">Notification</string>
     //OTP input
     <string name="phoneNumber">Phone Number</string>
     <string name="phoneNumberDesc">We will send an OTP to this number for confirmation!</string>
@@ -24,5 +28,4 @@
     <string name="great_responsibility">Greater Responsibility!</string>
     <string name="admin">Admin App</string>
     <string name="acm">ACM VIT</string>
-    <string name="version">v1.0</string>
 </resources>
