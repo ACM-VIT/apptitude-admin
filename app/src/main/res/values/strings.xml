@@ -9,4 +9,23 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="send_notification">Send Notification</string>
     <string name="notification">Notification</string>
+    //OTP input
+    <string name="phoneNumber">Phone Number</string>
+    <string name="phoneNumberDesc">We will send an OTP to this number for confirmation!</string>
+    <string name="continue_btn">Continue</string>
+    
+    //Verification
+    <string name="verificationTitle">Verification</string>
+    <string name="enter_otp">Please Enter the OTP you have received</string>
+
+    //Profile
+    <string name="profile">Profile</string>
+    <string name="profile_desc">Tell us your name and the power shall be yours!</string>
+    <string name="note">Remember , with great power comes great responsibility!</string>
+
+    //Splash
+    <string name="great_power">Great Power</string>
+    <string name="great_responsibility">Greater Responsibility!</string>
+    <string name="admin">Admin App</string>
+    <string name="acm">ACM VIT</string>
 </resources>

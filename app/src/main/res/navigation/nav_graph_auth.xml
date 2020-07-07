@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_auth"
+    app:startDestination="@id/userOtp">
+
+    <fragment
+        android:id="@+id/userOtp"
+        android:name="com.benrostudios.apptitudeadmin.ui.auth.userotp.UserOtp"
+        android:label="user_otp_fragment"
+        tools:layout="@layout/user_otp_fragment" >
+        <action
+            android:id="@+id/action_userOtp_to_verification"
+            app:destination="@id/verification" />
+    </fragment>
+    <fragment
+        android:id="@+id/verification"
+        android:name="com.benrostudios.apptitudeadmin.ui.auth.verification.Verification"
+        android:label="verification_fragment"
+        tools:layout="@layout/verification_fragment" >
+        <action
+            android:id="@+id/action_verification_to_profile"
+            app:destination="@id/profile" />
+    </fragment>
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.benrostudios.apptitudeadmin.ui.auth.profile.Profile"
+        android:label="profile_fragment"
+        tools:layout="@layout/profile_fragment" />
+</navigation>
