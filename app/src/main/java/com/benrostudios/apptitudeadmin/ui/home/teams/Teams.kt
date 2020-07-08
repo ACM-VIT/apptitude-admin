@@ -14,7 +14,6 @@ import com.benrostudios.apptitudeadmin.adapters.TeamsAdapter
 import com.benrostudios.apptitudeadmin.ui.base.ScopedFragment
 import com.benrostudios.apptitudeadmin.utils.hide
 import com.benrostudios.apptitudeadmin.utils.show
-import kotlinx.android.synthetic.main.participants_fragment.*
 import kotlinx.android.synthetic.main.teams_fragment.*
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
@@ -25,7 +24,7 @@ import org.kodein.di.generic.instance
 class Teams : ScopedFragment(),KodeinAware {
 
     override val kodein: Kodein by closestKodein()
-    private val viewModelFactoy: TeamsViewModelFactoy by instance()
+    private val viewModelFactory: TeamsViewModelFactory by instance()
     private lateinit var adapter: TeamsAdapter
     companion object {
         fun newInstance() = Teams()
@@ -42,7 +41,7 @@ class Teams : ScopedFragment(),KodeinAware {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this,viewModelFactoy).get(TeamsViewModel::class.java)
+        viewModel = ViewModelProvider(this,viewModelFactory).get(TeamsViewModel::class.java)
         fetchTeams()
         teamsSearchViewImplementation()
         teams_recyclerView.layoutManager = LinearLayoutManager(requireContext())

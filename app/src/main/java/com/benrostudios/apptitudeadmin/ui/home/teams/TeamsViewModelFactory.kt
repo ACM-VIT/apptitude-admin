@@ -7,7 +7,7 @@ import com.benrostudios.apptitudeadmin.ui.home.participants.ParticipantsViewMode
 
 
 @Suppress("Unchecked_Cast")
-class TeamsViewModelFactoy(
+class TeamsViewModelFactory(
     private val fetchDetails: FetchDetails
 ) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
