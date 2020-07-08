@@ -10,13 +10,16 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.benrostudios.apptitudeadmin.R
+import com.benrostudios.apptitudeadmin.data.models.AdminPanel
 import com.benrostudios.apptitudeadmin.ui.base.ScopedFragment
 import com.benrostudios.apptitudeadmin.ui.home.teams.TeamsViewModelFactory
+import kotlinx.android.synthetic.main.advanced_fragment.*
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import java.text.SimpleDateFormat
 
 class Advanced : ScopedFragment(), KodeinAware {
 
@@ -46,7 +49,19 @@ class Advanced : ScopedFragment(), KodeinAware {
         viewModel.fetchAdminPanel()
         viewModel.adminPanelResult.observe(viewLifecycleOwner, Observer {
             Log.d("Advanced","$it")
+            populateUI(it)
         })
+    }
+
+    fun populateUI(adminPanel: AdminPanel){
+        admin_discord_link.text = adminPanel.discordLink
+        admin_submission_deadline.text = dateConverter(adminPanel.submissionDeadline)
+        admin_event_status.text = if(adminPanel.allowProblemStatementGeneration) "Event Live!" else "Event yet to start!"
+    }
+
+    fun dateConverter(unix: Long): String{
+        val sdf = SimpleDateFormat("MM'/'dd'/'y hh:mm aa")
+        return sdf.format(unix*1000).toString()
     }
 
 }

@@ -2,8 +2,8 @@ package com.benrostudios.apptitudeadmin.data.models
 
 data class AdminPanel(
     val allowProblemStatementGeneration: Boolean,
-    val submissionDeadline: String,
+    val submissionDeadline: Long,
     val discordLink: String
 ){
-    constructor():this(false,"","")
+    constructor():this(false,0,"")
 }
