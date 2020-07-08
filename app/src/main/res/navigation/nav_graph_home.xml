@@ -40,4 +40,9 @@
         android:name="com.benrostudios.apptitudeadmin.ui.home.teamDetails.TeamDetails"
         android:label="team_details_fragment"
         tools:layout="@layout/team_details_fragment" />
+    <fragment
+        android:id="@+id/notification"
+        android:name="com.benrostudios.apptitudeadmin.ui.home.notification.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
 </navigation>
