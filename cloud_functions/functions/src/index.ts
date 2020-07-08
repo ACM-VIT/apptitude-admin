@@ -11,7 +11,7 @@ export const onMessageCreate = functions.database
     const topic = "notification"
 
     const payload = {
-        notification:{
+        data:{
             title: notification.title,
             body: notification.body
         }
