@@ -13,9 +13,4 @@
         android:icon="@drawable/ic_baseline_settings_24"
         android:title="@string/advanced_title" />
 
-    <item
-        android:id="@+id/notification"
-        android:icon="@drawable/ic_notifications_none_black_24dp"
-        android:title="@string/notification" />
-
 </menu>
