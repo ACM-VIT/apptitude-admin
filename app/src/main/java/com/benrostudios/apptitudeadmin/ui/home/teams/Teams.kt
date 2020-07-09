@@ -1,6 +1,7 @@
 package com.benrostudios.apptitudeadmin.ui.home.teams
 
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -39,6 +40,7 @@ class Teams : ScopedFragment(),KodeinAware {
         return inflater.inflate(R.layout.teams_fragment, container, false)
     }
 
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this,viewModelFactory).get(TeamsViewModel::class.java)
@@ -55,6 +57,8 @@ class Teams : ScopedFragment(),KodeinAware {
             teams_recyclerView.adapter = adapter
         })
     }
+
+
 
     fun teamsSearchViewImplementation(){
         teams_searchView.onActionViewCollapsed()
