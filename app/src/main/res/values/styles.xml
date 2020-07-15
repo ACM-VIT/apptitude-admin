@@ -7,7 +7,6 @@
         <item name="android:windowBackground">@color/background</item>
         <item name="android:editTextColor">@android:color/white</item>
         <item name="android:textColorHint">@android:color/white</item>
-<!--        <item name="android:background">@color/background</item>-->
             <item name="searchViewStyle">@style/SearchViewStyle</item>
         <item name="colorPrimaryDark">@color/statusBar</item>
 
@@ -19,16 +18,6 @@
         <item name="closeIcon">@drawable/ic_baseline_close_24</item>
         <item name="hintTextColor">@color/white</item>
         <item name="queryHint">@string/search_hint</item>
-    </style>
-
-    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.BottomSheetDialog">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorControlActivated">@color/colorPrimary</item>
-        <item name="bottomSheetStyle">@style/AppModalStyle</item>
-    </style>
-
-    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@drawable/rounded_modal_bottom_sheet</item>
     </style>
 
 </resources>

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/buttonAccent"
     tools:context=".ui.admin.AdminExecution">
 
@@ -26,7 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:backgroundTint="@color/background"
-        android:text="Button"
+        android:text="@string/update"
         app:layout_constraintBottom_toBottomOf="@+id/admin_execution_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/admin_execution_title" />
@@ -37,17 +37,20 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
+        android:layout_marginBottom="32dp"
         android:hint="Hint"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/admin_execution_button"
         app:layout_constraintStart_toStartOf="@+id/admin_execution_title"
         app:layout_constraintTop_toBottomOf="@+id/admin_execution_title">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/admin_execution_input"
-            android:singleLine="true"
-            android:maxLines="1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:maxLines="1"
+            android:textColor="@color/white"
+            android:singleLine="true" />
 
     </com.google.android.material.textfield.TextInputLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

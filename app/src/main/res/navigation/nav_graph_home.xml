@@ -9,7 +9,11 @@
         android:id="@+id/advanced"
         android:name="com.benrostudios.apptitudeadmin.ui.home.advanced.Advanced"
         android:label="advanced_fragment"
-        tools:layout="@layout/advanced_fragment" />
+        tools:layout="@layout/advanced_fragment" >
+        <action
+            android:id="@+id/action_advanced_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+    </fragment>
     <fragment
         android:id="@+id/participants"
         android:name="com.benrostudios.apptitudeadmin.ui.home.participants.Participants"
@@ -40,4 +44,9 @@
         android:name="com.benrostudios.apptitudeadmin.ui.home.teamDetails.TeamDetails"
         android:label="team_details_fragment"
         tools:layout="@layout/team_details_fragment" />
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.benrostudios.apptitudeadmin.ui.home.notification.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
 </navigation>

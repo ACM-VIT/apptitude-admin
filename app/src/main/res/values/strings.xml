@@ -40,5 +40,6 @@
     <string name="admin_notifications">Send Notifications!</string>
     <string name="upgrade_admin">Upgrade Admin</string>
     <string name="logout">Logout</string>
+    <string name="update">Update</string>
 
 </resources>

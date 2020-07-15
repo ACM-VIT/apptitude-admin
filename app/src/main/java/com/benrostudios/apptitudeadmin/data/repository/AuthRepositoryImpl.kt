@@ -61,7 +61,7 @@ class AuthRepositoryImpl : AuthRepository {
         firebaseDatabase = Firebase.database.getReference("/admins/$phone")
         var userFetcher = object : ValueEventListener{
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                Log.d("AuthRepo","$error")
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {

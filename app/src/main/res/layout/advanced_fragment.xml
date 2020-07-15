@@ -128,7 +128,7 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/cardView4"
+            android:id="@+id/event_status_cardView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -176,8 +176,8 @@
             android:fontFamily="@font/cerebrisansbold"
             android:text="@string/admin_triggers"
             android:textSize="24sp"
-            app:layout_constraintStart_toStartOf="@+id/cardView4"
-            app:layout_constraintTop_toBottomOf="@+id/cardView4" />
+            app:layout_constraintStart_toStartOf="@+id/event_status_cardView"
+            app:layout_constraintTop_toBottomOf="@+id/event_status_cardView" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/admin_notifications_cardView"
@@ -185,8 +185,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             app:cardBackgroundColor="@color/buttonAccent"
-            app:layout_constraintEnd_toEndOf="@+id/cardView4"
-            app:layout_constraintStart_toStartOf="@+id/cardView4"
+            app:layout_constraintEnd_toEndOf="@+id/event_status_cardView"
+            app:layout_constraintStart_toStartOf="@+id/event_status_cardView"
             app:layout_constraintTop_toBottomOf="@+id/textView22">
 
             <androidx.constraintlayout.widget.ConstraintLayout
