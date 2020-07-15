@@ -64,6 +64,10 @@ class AdminExecution : BottomSheetDialogFragment(), KodeinAware {
                 heading = "Event Status"; executionCommand =
                     "allowProblemStatementGeneration"; executionType = "boolean"
             }
+            "submission_begin" -> {
+                heading = "Submission Begin"; executionCommand =
+                    "submissionBegin"; executionType = "long"
+            }
         }
         if (executionType == "long") {
             admin_execution_input.isFocusable = false

@@ -11,6 +11,48 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/submission_cardView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:cardBackgroundColor="@color/buttonAccent"
+            app:layout_constraintEnd_toEndOf="@+id/discord_cardView"
+            app:layout_constraintStart_toStartOf="@+id/discord_cardView"
+            app:layout_constraintTop_toBottomOf="@+id/discord_cardView"
+            tools:visibility="visible">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/cerebrisansbold"
+                    android:text="@string/admin_submission"
+                    android:textSize="18sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/admin_submission_deadline"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="TextView"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/textView18"
+                    app:layout_constraintTop_toBottomOf="@+id/textView18" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
         <TextView
             android:id="@+id/advanced_title"
             android:layout_width="wrap_content"
@@ -87,33 +129,33 @@
             app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/submission_cardView"
+            android:id="@+id/submission_begin_cardView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             app:cardBackgroundColor="@color/buttonAccent"
             app:layout_constraintEnd_toEndOf="@+id/discord_cardView"
-            app:layout_constraintStart_toStartOf="@+id/discord_cardView"
-            app:layout_constraintTop_toBottomOf="@+id/discord_cardView">
+            app:layout_constraintStart_toStartOf="@+id/event_status_cardView"
+            app:layout_constraintTop_toBottomOf="@+id/event_status_cardView">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/textView18"
+                    android:id="@+id/submission_begin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/cerebrisansbold"
-                    android:text="@string/admin_submission"
+                    android:text="@string/admin_submission_begin"
                     android:textSize="18sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/admin_submission_deadline"
+                    android:id="@+id/admin_submission_begin"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
@@ -122,8 +164,8 @@
                     android:text="TextView"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/textView18"
-                    app:layout_constraintTop_toBottomOf="@+id/textView18" />
+                    app:layout_constraintStart_toStartOf="@+id/submission_begin"
+                    app:layout_constraintTop_toBottomOf="@+id/submission_begin" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
 
@@ -177,7 +219,7 @@
             android:text="@string/admin_triggers"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="@+id/event_status_cardView"
-            app:layout_constraintTop_toBottomOf="@+id/event_status_cardView" />
+            app:layout_constraintTop_toBottomOf="@+id/submission_begin_cardView" />
 
         <androidx.cardview.widget.CardView
             android:id="@+id/admin_notifications_cardView"

@@ -68,6 +68,9 @@ class Advanced : ScopedFragment(), KodeinAware {
                 if (admin_event_status.text.toString() == "Event Live!") "true" else "false"
             )
         }
+        submission_begin_cardView.setOnClickListener {
+            callBottomSheet("submission_begin", admin_submission_begin.text.toString())
+        }
         admin_notifications_cardView.setOnClickListener {
             navController.navigate(R.id.action_advanced_to_notificationFragment)
         }
@@ -81,19 +84,20 @@ class Advanced : ScopedFragment(), KodeinAware {
         })
     }
 
-    fun populateUI(adminPanel: AdminPanel) {
+    private fun populateUI(adminPanel: AdminPanel) {
         admin_discord_link.text = adminPanel.discordLink
         admin_submission_deadline.text = dateConverter(adminPanel.submissionDeadline)
         admin_event_status.text =
             if (adminPanel.allowProblemStatementGeneration) "Event Live!" else "Event yet to start!"
+        admin_submission_begin.text = dateConverter(adminPanel.submissionBegin)
     }
 
-    fun dateConverter(unix: Long): String {
+    private fun dateConverter(unix: Long): String {
         val sdf = SimpleDateFormat("MM'/'dd'/'y hh:mm aa")
         return sdf.format(unix * 1000).toString()
     }
 
-    fun callBottomSheet(name: String, value: String) {
+    private fun callBottomSheet(name: String, value: String) {
         val bundle = Bundle()
         bundle.putString(SELECTED_TITLE, name)
         bundle.putString(SELECTED_VALUE, value)

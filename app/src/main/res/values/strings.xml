@@ -35,6 +35,7 @@
     <string name="admin_greet_sub">This is your panel</string>
     <string name="admin_events">Events</string>
     <string name="admin_submission">Submission Deadline</string>
+    <string name="admin_submission_begin">Submission Be</string>
     <string name="admin_event_status">Event Status</string>
     <string name="admin_triggers">Event Triggers</string>
     <string name="admin_notifications">Send Notifications!</string>
