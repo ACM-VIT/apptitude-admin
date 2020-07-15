@@ -31,13 +31,13 @@ class AdminRepositoryImpl : AdminRepository {
             }
 
         }
-        databaseReference.addListenerForSingleValueEvent(fetchAdminPanel)
+        databaseReference.addValueEventListener(fetchAdminPanel)
     }
 
     override val adminPanelResult: LiveData<AdminPanel>
         get() = _adminPanelResult
 
-    override suspend fun adminExecution(option: String, value: String) {
+    override suspend fun <T : Any> adminExecution(option: String, value: T) {
         databaseReference = Firebase.database.getReference("/adminControl/$option")
         databaseReference.setValue(value).addOnCompleteListener {
             if(it.isSuccessful){
