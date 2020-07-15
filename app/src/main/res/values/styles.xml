@@ -20,4 +20,15 @@
         <item name="hintTextColor">@color/white</item>
         <item name="queryHint">@string/search_hint</item>
     </style>
+
+    <style name="AppBottomSheetDialogTheme" parent="Theme.Design.BottomSheetDialog">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorControlActivated">@color/colorPrimary</item>
+        <item name="bottomSheetStyle">@style/AppModalStyle</item>
+    </style>
+
+    <style name="AppModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@drawable/rounded_modal_bottom_sheet</item>
+    </style>
+
 </resources>
