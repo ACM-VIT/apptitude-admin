@@ -8,7 +8,7 @@
         <item name="android:editTextColor">@android:color/white</item>
         <item name="android:textColorHint">@android:color/white</item>
 <!--        <item name="android:background">@color/background</item>-->
-        <item name="searchViewStyle">@style/SearchViewStyle</item>
+            <item name="searchViewStyle">@style/SearchViewStyle</item>
         <item name="colorPrimaryDark">@color/statusBar</item>
 
     </style>
