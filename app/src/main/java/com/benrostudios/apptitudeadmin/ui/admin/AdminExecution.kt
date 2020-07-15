@@ -1,5 +1,8 @@
 package com.benrostudios.apptitudeadmin.ui.admin
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -17,6 +20,8 @@ import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
+import java.util.*
+
 
 class AdminExecution : BottomSheetDialogFragment(), KodeinAware {
 
@@ -52,10 +57,12 @@ class AdminExecution : BottomSheetDialogFragment(), KodeinAware {
                 heading = "Discord"; executionCommand = "discordLink"; executionType = "string"
             }
             "submission_deadline" -> {
-                heading = "Submission Deadline"; executionCommand = "submissionDeadline"; executionType = "long"
+                heading = "Submission Deadline"; executionCommand =
+                    "submissionDeadline"; executionType = "long"
             }
             "event_status" -> {
-                heading = "Event Status"; executionCommand = "allowProblemStatementGeneration"; executionType = "boolean"
+                heading = "Event Status"; executionCommand =
+                    "allowProblemStatementGeneration"; executionType = "boolean"
             }
         }
         admin_execution_title.text = heading
@@ -63,8 +70,13 @@ class AdminExecution : BottomSheetDialogFragment(), KodeinAware {
         admin_execution_input.setText(value)
         admin_execution_button.setOnClickListener {
             if (admin_execution_input.text.toString().isNotEmpty()) {
-                resultListener()
-                executeOperation(executionType)
+                if (executionType == "long") {
+                    datePicker()
+                } else {
+                    resultListener()
+                    executeOperation(executionType)
+                }
+
             }
         }
     }
@@ -73,17 +85,17 @@ class AdminExecution : BottomSheetDialogFragment(), KodeinAware {
     private fun executeOperation(type: String) {
         when (type) {
             "boolean" ->
-                viewModel.executeOperation(
+                viewModel.executeOperation<Boolean>(
                     executionCommand,
                     admin_execution_input.text.toString().toLowerCase().startsWith("t")
                 )
 
-            "string" -> viewModel.executeOperation(
+            "string" -> viewModel.executeOperation<String>(
                 executionCommand,
                 admin_execution_input.text.toString()
             )
 
-            "long" -> viewModel.executeOperation(executionCommand,longTime)
+            "long" -> viewModel.executeOperation<Long>(executionCommand, longTime)
         }
 
     }
@@ -97,6 +109,41 @@ class AdminExecution : BottomSheetDialogFragment(), KodeinAware {
                 requireActivity().shortToaster("Error in updating value!! , contact ACM App Dev Team")
             }
         })
+    }
+
+    fun datePicker() {
+        val c = Calendar.getInstance()
+        val year = c.get(Calendar.YEAR)
+        val month = c.get(Calendar.MONTH)
+        val day = c.get(Calendar.DAY_OF_MONTH)
+        val hour = c.get(Calendar.HOUR_OF_DAY)
+        val minute = c.get(Calendar.MINUTE)
+        var timeInMilli: Long = 0
+        val dpd = DatePickerDialog(
+            requireContext(),
+            DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                c.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                c.set(Calendar.MONTH, monthOfYear)
+                c.set(Calendar.YEAR, year)
+                timeInMilli = c.timeInMillis / 1000
+            },
+            year,
+            month,
+            day
+        )
+        dpd.show()
+        dpd.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
+            dpd.dismiss()
+            val mTimePicker = TimePickerDialog(requireContext(),
+                TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
+                    c.set(Calendar.HOUR_OF_DAY, hourOfDay)
+                    c.set(Calendar.MINUTE, minute)
+                    timeInMilli = c.timeInMillis / 1000
+                    Log.d("timeInMill", "$timeInMilli")
+                }, hour, minute, false
+            )
+            mTimePicker.show()
+        }
     }
 
 }

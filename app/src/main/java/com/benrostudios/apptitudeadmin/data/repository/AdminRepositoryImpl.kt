@@ -1,5 +1,6 @@
 package com.benrostudios.apptitudeadmin.data.repository
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.benrostudios.apptitudeadmin.data.models.AdminPanel
@@ -38,6 +39,7 @@ class AdminRepositoryImpl : AdminRepository {
         get() = _adminPanelResult
 
     override suspend fun <T : Any> adminExecution(option: String, value: T) {
+        Log.d("AdminRepo","${value::class.simpleName}")
         databaseReference = Firebase.database.getReference("/adminControl/$option")
         databaseReference.setValue(value).addOnCompleteListener {
             if(it.isSuccessful){

@@ -41,5 +41,6 @@
     <string name="upgrade_admin">Upgrade Admin</string>
     <string name="logout">Logout</string>
     <string name="update">Update</string>
+    <string name="okay">Okay</string>
 
 </resources>

@@ -15,7 +15,7 @@ class AdminExecutionViewModel(
 
     fun <T: Any> executeOperation(option:String, value: T){
         viewModelScope.launch(Dispatchers.IO){
-            adminRepository.adminExecution<T>(option , value)
+            adminRepository.adminExecution(option , value)
         }
     }
 }

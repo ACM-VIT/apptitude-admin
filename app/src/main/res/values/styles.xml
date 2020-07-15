@@ -7,8 +7,10 @@
         <item name="android:windowBackground">@color/background</item>
         <item name="android:editTextColor">@android:color/white</item>
         <item name="android:textColorHint">@android:color/white</item>
-            <item name="searchViewStyle">@style/SearchViewStyle</item>
+        <item name="searchViewStyle">@style/SearchViewStyle</item>
         <item name="colorPrimaryDark">@color/statusBar</item>
+        <item name="android:datePickerDialogTheme">@style/DatePickerStyle</item>
+        <item name="android:timePickerDialogTheme">@style/DatePickerStyle</item>
 
     </style>
     <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
@@ -19,5 +21,14 @@
         <item name="hintTextColor">@color/white</item>
         <item name="queryHint">@string/search_hint</item>
     </style>
+
+
+
+    <style name="DatePickerStyle" parent="Theme.MaterialComponents.Light.Dialog">
+        <item name="colorAccent">@color/buttonAccent</item>
+        <item name="materialButtonStyle">@style/Widget.MaterialComponents.Button.TextButton</item>
+    </style>
+
+
 
 </resources>
