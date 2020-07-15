@@ -65,18 +65,20 @@ class AdminExecution : BottomSheetDialogFragment(), KodeinAware {
                     "allowProblemStatementGeneration"; executionType = "boolean"
             }
         }
+        if (executionType == "long") {
+            admin_execution_input.isFocusable = false
+            admin_execution_input.setOnClickListener {
+                datePicker()
+            }
+        }
         admin_execution_title.text = heading
         admin_execution_outline.hint = "Enter $heading"
         admin_execution_input.setText(value)
+
         admin_execution_button.setOnClickListener {
             if (admin_execution_input.text.toString().isNotEmpty()) {
-                if (executionType == "long") {
-                    datePicker()
-                } else {
-                    resultListener()
-                    executeOperation(executionType)
-                }
-
+                resultListener()
+                executeOperation(executionType)
             }
         }
     }
@@ -111,7 +113,7 @@ class AdminExecution : BottomSheetDialogFragment(), KodeinAware {
         })
     }
 
-    fun datePicker() {
+    private fun datePicker() {
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
@@ -134,12 +136,15 @@ class AdminExecution : BottomSheetDialogFragment(), KodeinAware {
         dpd.show()
         dpd.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
             dpd.dismiss()
-            val mTimePicker = TimePickerDialog(requireContext(),
+            val mTimePicker = TimePickerDialog(
+                requireContext(),
                 TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
                     c.set(Calendar.HOUR_OF_DAY, hourOfDay)
                     c.set(Calendar.MINUTE, minute)
                     timeInMilli = c.timeInMillis / 1000
+                    longTime = timeInMilli
                     Log.d("timeInMill", "$timeInMilli")
+                    admin_execution_input.setText("$timeInMilli")
                 }, hour, minute, false
             )
             mTimePicker.show()
