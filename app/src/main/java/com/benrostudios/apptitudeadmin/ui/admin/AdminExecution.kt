@@ -23,6 +23,8 @@ class AdminExecution : BottomSheetDialogFragment(), KodeinAware {
     override val kodein: Kodein by closestKodein()
     private val viewModelFactory: AdminExecutionViewModelFactory by instance()
     private lateinit var executionCommand: String
+    private lateinit var executionType: String
+    private var longTime: Long = 0
 
     companion object {
         fun newInstance() = AdminExecution()
@@ -47,13 +49,13 @@ class AdminExecution : BottomSheetDialogFragment(), KodeinAware {
         var heading = ""
         when (title) {
             "discord" -> {
-                heading = "Discord"; executionCommand = "discordLink"
+                heading = "Discord"; executionCommand = "discordLink"; executionType = "string"
             }
             "submission_deadline" -> {
-                heading = "Submission Deadline"; executionCommand = "submissionDeadline"
+                heading = "Submission Deadline"; executionCommand = "submissionDeadline"; executionType = "long"
             }
             "event_status" -> {
-                heading = "Event Status"; executionCommand = "allowProblemStatementGeneration"
+                heading = "Event Status"; executionCommand = "allowProblemStatementGeneration"; executionType = "boolean"
             }
         }
         admin_execution_title.text = heading
@@ -62,14 +64,28 @@ class AdminExecution : BottomSheetDialogFragment(), KodeinAware {
         admin_execution_button.setOnClickListener {
             if (admin_execution_input.text.toString().isNotEmpty()) {
                 resultListener()
-                executeOperation()
+                executeOperation(executionType)
             }
         }
     }
 
 
-    private fun executeOperation() {
-        viewModel.executeOperation(executionCommand, admin_execution_input.text.toString())
+    private fun executeOperation(type: String) {
+        when (type) {
+            "boolean" ->
+                viewModel.executeOperation(
+                    executionCommand,
+                    admin_execution_input.text.toString().toLowerCase().startsWith("t")
+                )
+
+            "string" -> viewModel.executeOperation(
+                executionCommand,
+                admin_execution_input.text.toString()
+            )
+
+            "long" -> viewModel.executeOperation(executionCommand,longTime)
+        }
+
     }
 
     private fun resultListener() {
