@@ -14,13 +14,16 @@ import androidx.navigation.Navigation
 import com.benrostudios.apptitudeadmin.R
 import com.benrostudios.apptitudeadmin.data.models.AdminPanel
 import com.benrostudios.apptitudeadmin.ui.admin.adminExecution.AdminExecution
+import com.benrostudios.apptitudeadmin.ui.admin.adminUpgrade.AdminUpgrade
 import com.benrostudios.apptitudeadmin.ui.auth.AuthActivity
 import com.benrostudios.apptitudeadmin.ui.base.ScopedFragment
 import com.benrostudios.apptitudeadmin.utils.SharedPrefsUtils
 import com.benrostudios.apptitudeadmin.utils.errSnack
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.admin_upgrade_fragment.*
 import kotlinx.android.synthetic.main.advanced_fragment.*
+import kotlinx.android.synthetic.main.advanced_fragment.upgrade_admin_btn
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
@@ -59,6 +62,15 @@ class Advanced : ScopedFragment(), KodeinAware {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory).get(AdvancedViewModel::class.java)
         fetchAdminPanel()
+        upgrade_admin_btn.setOnClickListener {
+            val adminLevel = sharedPrefsUtils.retrieveAdminLevel()
+            if(adminLevel != 0) {
+                val adminUpgrade = AdminUpgrade()
+                adminUpgrade.show(activity?.supportFragmentManager!!, adminUpgrade.tag)
+            }else{
+                upgrade_admin_btn.errSnack("You are already an privileged admin!")
+            }
+        }
         val adminLevel = sharedPrefsUtils.retrieveAdminLevel() ?: 2
         logout_btn.setOnClickListener {
             FirebaseAuth.getInstance().signOut()

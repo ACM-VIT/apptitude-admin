@@ -55,5 +55,6 @@
     <string name="cur_admin_lvl">Your current admin level is :</string>
     <string name="enter_admin_password">Enter Admin Password</string>
     <string name="request_privilege">Request Privileges</string>
+    <string name="upgrade_admin_prev">Upgrade to a Privileged Admin</string>
 
 </resources>

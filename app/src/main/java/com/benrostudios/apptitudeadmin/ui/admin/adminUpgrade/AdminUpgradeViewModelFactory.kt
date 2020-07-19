@@ -10,6 +10,6 @@ class AdminUpgradeViewModelFactory(
     private val adminPrivileges: AdminPrivileges
 ) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        return AdminUpgradeViewModelFactory(adminPrivileges) as T
+        return AdminUpgradeViewModel(adminPrivileges) as T
     }
 }

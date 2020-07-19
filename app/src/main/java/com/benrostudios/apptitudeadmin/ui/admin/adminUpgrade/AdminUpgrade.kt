@@ -7,11 +7,10 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.benrostudios.apptitudeadmin.R
-import com.benrostudios.apptitudeadmin.utils.SharedPrefsUtils
-import com.benrostudios.apptitudeadmin.utils.errSnack
+import com.benrostudios.apptitudeadmin.utils.*
+import com.benrostudios.apptitudeadmin.utils.Constants.Companion.ROOT_PASSWORD
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.advanced_fragment.*
+import kotlinx.android.synthetic.main.admin_upgrade_fragment.*
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
@@ -40,6 +39,19 @@ class AdminUpgrade : BottomSheetDialogFragment(), KodeinAware {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory).get(AdminUpgradeViewModel::class.java)
         listen()
+        cur_admin_level_display.text = "${sharedPrefsUtils.retrieveAdminLevel()}"
+        upgrade_admin_privileges_btn.setOnClickListener {
+            if(admin_upgrade_input.isValidAlphaNumeric()){
+                if(admin_upgrade_input.text.toString() == ROOT_PASSWORD){
+                    requestIncrementation()
+                    progressBarAdminPrivilege.show()
+                }else{
+                    admin_upgrade_outline.error = "Not a valid password!"
+                }
+            }else{
+                admin_upgrade_outline.error = "Invalid Password Format!"
+            }
+        }
     }
 
     private fun requestIncrementation(){
@@ -51,11 +63,13 @@ class AdminUpgrade : BottomSheetDialogFragment(), KodeinAware {
         viewModel.getAdminIncrementationStatus.observe(viewLifecycleOwner, Observer {
             if(it){
                 sharedPrefsUtils.saveAdminLevel(0)
-                upgrade_admin_btn.errSnack("Success , you are a privileged admin now!")
+                requireContext().shortToaster("Success , you are a privileged admin now!")
+                dismiss()
             }else{
-                upgrade_admin_btn.errSnack("Failure to upgrade, contact AppDept Lead",Snackbar.LENGTH_LONG)
+                requireContext().shortToaster("Failure to upgrade!, contact AppDept Lead")
+                progressBarAdminPrivilege.hide()
             }
-            dismiss()
+
         })
     }
 
