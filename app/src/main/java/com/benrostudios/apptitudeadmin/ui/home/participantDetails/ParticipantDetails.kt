@@ -76,8 +76,6 @@ class ParticipantDetails : BottomSheetDialogFragment(),KodeinAware {
                 requireActivity().shortToaster("No Email apps found!")
             }
         }
-
-
     }
 
 }

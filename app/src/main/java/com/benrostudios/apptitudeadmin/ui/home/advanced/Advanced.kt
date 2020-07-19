@@ -15,14 +15,15 @@ import com.benrostudios.apptitudeadmin.R
 import com.benrostudios.apptitudeadmin.data.models.AdminPanel
 import com.benrostudios.apptitudeadmin.ui.admin.AdminExecution
 import com.benrostudios.apptitudeadmin.ui.base.ScopedFragment
-import com.benrostudios.apptitudeadmin.ui.home.teams.TeamsViewModelFactory
+import com.benrostudios.apptitudeadmin.utils.SharedPrefsUtils
+import com.benrostudios.apptitudeadmin.utils.errSnack
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.advanced_fragment.*
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
-import java.nio.BufferUnderflowException
 import java.text.SimpleDateFormat
 
 class Advanced : ScopedFragment(), KodeinAware {
@@ -30,6 +31,7 @@ class Advanced : ScopedFragment(), KodeinAware {
     override val kodein: Kodein by closestKodein()
     private val viewModelFactory: AdvancedViewModelFactory by instance()
     private lateinit var navController: NavController
+    private val sharedPrefsUtils: SharedPrefsUtils by instance()
 
     companion object {
         fun newInstance() = Advanced()
@@ -55,28 +57,47 @@ class Advanced : ScopedFragment(), KodeinAware {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory).get(AdvancedViewModel::class.java)
         fetchAdminPanel()
+        val adminLevel = sharedPrefsUtils.retrieveAdminLevel() ?: 2
+        if( adminLevel < 1){
+            discord_cardView.setOnClickListener {
+                callBottomSheet("discord", admin_discord_link.text.toString())
+            }
+            submission_cardView.setOnClickListener {
+                callBottomSheet("submission_deadline", admin_submission_deadline.text.toString())
+            }
+            event_status_cardView.setOnClickListener {
+                callBottomSheet(
+                    "event_status",
+                    if (admin_event_status.text.toString() == "Event Live!") "true" else "false"
+                )
+            }
+            submission_begin_cardView.setOnClickListener {
+                callBottomSheet("submission_begin", admin_submission_begin.text.toString())
+            }
+            admin_notifications_cardView.setOnClickListener {
+                navController.navigate(R.id.action_advanced_to_notificationFragment)
+            }
+        }else{
+            discord_cardView.setOnClickListener {
+                privilegesError(it)
+            }
+            submission_cardView.setOnClickListener {
+                privilegesError(it)
+            }
+            event_status_cardView.setOnClickListener {
+                privilegesError(it)
+            }
+            submission_begin_cardView.setOnClickListener {
+                privilegesError(it)
+            }
+            admin_notifications_cardView.setOnClickListener {
+               privilegesError(it)
+            }
+        }
 
-        discord_cardView.setOnClickListener {
-            callBottomSheet("discord", admin_discord_link.text.toString())
-        }
-        submission_cardView.setOnClickListener {
-            callBottomSheet("submission_deadline", admin_submission_deadline.text.toString())
-        }
-        event_status_cardView.setOnClickListener {
-            callBottomSheet(
-                "event_status",
-                if (admin_event_status.text.toString() == "Event Live!") "true" else "false"
-            )
-        }
-        submission_begin_cardView.setOnClickListener {
-            callBottomSheet("submission_begin", admin_submission_begin.text.toString())
-        }
-        admin_notifications_cardView.setOnClickListener {
-            navController.navigate(R.id.action_advanced_to_notificationFragment)
-        }
     }
 
-    fun fetchAdminPanel() = launch {
+    private fun fetchAdminPanel() = launch {
         viewModel.fetchAdminPanel()
         viewModel.adminPanelResult.observe(viewLifecycleOwner, Observer {
             Log.d("Advanced", "$it")
@@ -107,6 +128,10 @@ class Advanced : ScopedFragment(), KodeinAware {
             activity?.supportFragmentManager!!,
             bottomSheetFragment.tag
         )
+    }
+
+    private fun privilegesError(view : View){
+        view.errSnack("You aren't a privileged admin , contact ACM AppDev Team",Snackbar.LENGTH_LONG)
     }
 
 }
