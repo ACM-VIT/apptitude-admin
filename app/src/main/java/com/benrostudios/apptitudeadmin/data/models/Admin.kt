@@ -1,7 +1,7 @@
 package com.benrostudios.apptitudeadmin.data.models
 
 data class Admin(
-    val level: String,
+    val level: Int,
     val login: String,
     val name: String,
     val phone: String

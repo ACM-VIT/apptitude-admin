@@ -59,7 +59,7 @@ class Profile : ScopedFragment(), KodeinAware {
     }
 
     fun makeProfile() = launch{
-        val adminObj: Admin = Admin("2","${System.currentTimeMillis()/1000}",name_input.text.toString(),sharedPrefsUtils.retrieveMobile() ?: "Unknown")
+        val adminObj: Admin = Admin(2,"${System.currentTimeMillis()/1000}",name_input.text.toString(),sharedPrefsUtils.retrieveMobile() ?: "Unknown")
         viewModel.registerUser(adminObj)
     }
 

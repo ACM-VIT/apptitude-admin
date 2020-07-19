@@ -1,5 +1,6 @@
 package com.benrostudios.apptitudeadmin.ui.home.advanced
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
@@ -113,6 +114,7 @@ class Advanced : ScopedFragment(), KodeinAware {
         admin_submission_begin.text = dateConverter(adminPanel.submissionBegin)
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun dateConverter(unix: Long): String {
         val sdf = SimpleDateFormat("MM'/'dd'/'y hh:mm aa")
         return sdf.format(unix * 1000).toString()
