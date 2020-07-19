@@ -11,7 +11,7 @@ import com.benrostudios.apptitudeadmin.ui.home.participants.ParticipantViewModel
 import com.benrostudios.apptitudeadmin.ui.home.teamDetails.TeamDetailsViewModelFactory
 import com.benrostudios.apptitudeadmin.ui.home.teams.TeamsViewModelFactory
 import com.benrostudios.apptitudeadmin.utils.SharedPrefsUtils
-import com.ieeevit.gakko.ui.splash.SplashViewModelFactory
+import com.benrostudios.apptitudeadmin.ui.splash.SplashViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.androidXModule

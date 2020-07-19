@@ -17,6 +17,7 @@ import com.benrostudios.apptitudeadmin.ui.admin.adminExecution.AdminExecution
 import com.benrostudios.apptitudeadmin.ui.admin.adminUpgrade.AdminUpgrade
 import com.benrostudios.apptitudeadmin.ui.auth.AuthActivity
 import com.benrostudios.apptitudeadmin.ui.base.ScopedFragment
+import com.benrostudios.apptitudeadmin.ui.splash.SplashActivity
 import com.benrostudios.apptitudeadmin.utils.SharedPrefsUtils
 import com.benrostudios.apptitudeadmin.utils.errSnack
 import com.google.android.material.snackbar.Snackbar

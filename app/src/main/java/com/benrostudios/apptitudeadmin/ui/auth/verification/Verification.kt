@@ -16,6 +16,7 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.benrostudios.apptitudeadmin.R
 import com.benrostudios.apptitudeadmin.ui.base.ScopedFragment
+import com.benrostudios.apptitudeadmin.ui.home.MainActivity
 import com.benrostudios.apptitudeadmin.utils.SharedPrefsUtils
 import com.benrostudios.apptitudeadmin.utils.hide
 import com.benrostudios.apptitudeadmin.utils.shortToaster
@@ -151,12 +152,23 @@ class Verification : ScopedFragment(), KodeinAware {
         }
     }
 
-    fun getResponse() = launch {
+    private fun getResponse() = launch {
         viewModel.authResponse.observe(viewLifecycleOwner, Observer {
             if(it){
-                utils.saveMobile(phoneNumber)
-                utils.saveAdminLevel(2)
-                navController.navigate(R.id.action_verification_to_profile)
+                viewModel.userChecker.observe(viewLifecycleOwner, Observer { user ->
+                    if(user){
+                        utils.saveMobile(phoneNumber)
+                        utils.saveAdminLevel(2)
+                        val intent = Intent(requireActivity(),MainActivity::class.java)
+                        startActivity(intent)
+                        activity?.finish()
+                    }else{
+                        utils.saveMobile(phoneNumber)
+                        utils.saveAdminLevel(2)
+                        navController.navigate(R.id.action_verification_to_profile)
+                    }
+                })
+
             }else{
                 Snackbar.make(otp_verify_btn,"Verification Failure",Snackbar.LENGTH_LONG).show()
                 verfication_progress.hide()

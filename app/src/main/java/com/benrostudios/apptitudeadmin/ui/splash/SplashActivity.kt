@@ -15,8 +15,6 @@ import com.benrostudios.apptitudeadmin.ui.auth.AuthActivity
 import com.benrostudios.apptitudeadmin.ui.home.MainActivity
 import com.benrostudios.apptitudeadmin.utils.SharedPrefsUtils
 import com.google.firebase.auth.FirebaseAuth
-import com.ieeevit.gakko.ui.splash.SplashViewModel
-import com.ieeevit.gakko.ui.splash.SplashViewModelFactory
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.closestKodein

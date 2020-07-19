@@ -1,4 +1,4 @@
-package com.ieeevit.gakko.ui.splash
+package com.benrostudios.apptitudeadmin.ui.splash
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

@@ -24,14 +24,17 @@ class FetchDetailsImpl : FetchDetails {
         databaseReference = Firebase.database.getReference("/participants")
         val participantFetcher = object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                Log.d("FetchDetailsRepo","DB fetchDetails Error")
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
                     for (x in snapshot.children) {
                         val participant = x.getValue(Participant::class.java)
-                        participant?.let { _participants.add(it) }
+                        participant?.let {
+                            participant.participantUid = x.key.toString()
+                            _participants.add(it)
+                        }
                     }
                     _participantsList.postValue(_participants)
                 }
@@ -46,7 +49,7 @@ class FetchDetailsImpl : FetchDetails {
         databaseReference = Firebase.database.getReference("/teams")
         val teamsFetcher = object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                Log.d("FetchDetailsRepo","DB fetchDetails Error")
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -76,7 +79,7 @@ class FetchDetailsImpl : FetchDetails {
             databaseReference = Firebase.database.getReference("/participants/$x")
             val participantFetcher = object : ValueEventListener {
                 override fun onCancelled(error: DatabaseError) {
-                    TODO("Not yet implemented")
+                    Log.d("FetchDetailsRepo","DB fetchDetails Error")
                 }
 
                 override fun onDataChange(snapshot: DataSnapshot) {
@@ -103,7 +106,7 @@ class FetchDetailsImpl : FetchDetails {
         databaseReference = Firebase.database.getReference("teams/$teamId")
         val teamDetailFetcher = object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                Log.d("FetchDetailsRepo","DB fetchDetails Error")
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {

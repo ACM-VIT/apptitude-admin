@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat.getSystemService
 import com.benrostudios.apptitudeadmin.R
 import com.benrostudios.apptitudeadmin.data.models.Participant
 import com.benrostudios.apptitudeadmin.ui.base.ScopedFragment
+import com.benrostudios.apptitudeadmin.utils.errSnack
 import com.benrostudios.apptitudeadmin.utils.shortToaster
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.participant_details_fragment.*
@@ -55,6 +56,10 @@ class ParticipantDetails : BottomSheetDialogFragment(),KodeinAware {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(ParticipantDetailsViewModel::class.java)
         populateUI()
+        deleteParticipant.setOnClickListener {
+            requireContext().shortToaster("This feature is a work in progress!")
+            nukeParticipant()
+        }
     }
 
     private fun populateUI(){
@@ -76,6 +81,10 @@ class ParticipantDetails : BottomSheetDialogFragment(),KodeinAware {
                 requireActivity().shortToaster("No Email apps found!")
             }
         }
+    }
+
+    private fun nukeParticipant(){
+
     }
 
 }

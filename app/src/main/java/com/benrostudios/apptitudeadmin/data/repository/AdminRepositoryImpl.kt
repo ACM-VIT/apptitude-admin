@@ -19,7 +19,7 @@ class AdminRepositoryImpl : AdminRepository {
         databaseReference = Firebase.database.getReference("/adminControl")
         val fetchAdminPanel = object : ValueEventListener{
             override fun onCancelled(error: DatabaseError) {
-                TODO("Not yet implemented")
+                Log.d("AdminRepo","DB fetchAdminPanel Error")
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
