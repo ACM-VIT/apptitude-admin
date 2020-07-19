@@ -13,7 +13,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.benrostudios.apptitudeadmin.R
 import com.benrostudios.apptitudeadmin.ui.home.advanced.Advanced.Companion.SELECTED_TITLE
 import com.benrostudios.apptitudeadmin.ui.home.advanced.Advanced.Companion.SELECTED_VALUE
+import com.benrostudios.apptitudeadmin.utils.hide
 import com.benrostudios.apptitudeadmin.utils.shortToaster
+import com.benrostudios.apptitudeadmin.utils.show
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.admin_execution_fragment.*
 import org.kodein.di.Kodein
@@ -83,6 +85,7 @@ class AdminExecution : BottomSheetDialogFragment(), KodeinAware {
 
         admin_execution_button.setOnClickListener {
             if (admin_execution_input.text.toString().isNotEmpty() && admin_execution_input.text.toString() != value) {
+                admin_execution_progressbar.show()
                 resultListener()
                 executeOperation(executionType)
             }else{
@@ -116,6 +119,7 @@ class AdminExecution : BottomSheetDialogFragment(), KodeinAware {
                 requireActivity().shortToaster("Value Changed Successfully!")
                 dismiss()
             } else {
+                admin_execution_progressbar.hide()
                 requireActivity().shortToaster("Error in updating value!! , contact ACM App Dev Team")
             }
         })

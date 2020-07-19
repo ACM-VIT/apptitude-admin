@@ -56,5 +56,6 @@
     <string name="enter_admin_password">Enter Admin Password</string>
     <string name="request_privilege">Request Privileges</string>
     <string name="upgrade_admin_prev">Upgrade to a Privileged Admin</string>
+    <string name="delete_btn">Delete Participant</string>
 
 </resources>

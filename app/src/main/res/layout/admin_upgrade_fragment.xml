@@ -129,7 +129,7 @@
     <ProgressBar
         android:visibility="invisible"
         android:indeterminate="true"
-        android:id="@+id/progressBarAdminPrivilege"
+        android:id="@+id/admin_privilege_progress_bar"
         style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

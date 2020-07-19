@@ -44,7 +44,7 @@ class AdminUpgrade : BottomSheetDialogFragment(), KodeinAware {
             if(admin_upgrade_input.isValidAlphaNumeric()){
                 if(admin_upgrade_input.text.toString() == ROOT_PASSWORD){
                     requestIncrementation()
-                    progressBarAdminPrivilege.show()
+                    admin_privilege_progress_bar.show()
                 }else{
                     admin_upgrade_outline.error = "Not a valid password!"
                 }
@@ -67,7 +67,7 @@ class AdminUpgrade : BottomSheetDialogFragment(), KodeinAware {
                 dismiss()
             }else{
                 requireContext().shortToaster("Failure to upgrade!, contact AppDept Lead")
-                progressBarAdminPrivilege.hide()
+                admin_privilege_progress_bar.hide()
             }
 
         })
