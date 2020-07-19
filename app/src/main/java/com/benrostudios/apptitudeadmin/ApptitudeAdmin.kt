@@ -8,6 +8,7 @@ import com.benrostudios.apptitudeadmin.ui.auth.profile.ProfileViewModelFactory
 import com.benrostudios.apptitudeadmin.ui.auth.verification.VerificationViewModelFactory
 import com.benrostudios.apptitudeadmin.ui.home.advanced.AdvancedViewModelFactory
 import com.benrostudios.apptitudeadmin.ui.home.participants.ParticipantViewModelFactory
+import com.benrostudios.apptitudeadmin.ui.home.teamDetails.TeamDetailsViewModelFactory
 import com.benrostudios.apptitudeadmin.ui.home.teams.TeamsViewModelFactory
 import com.benrostudios.apptitudeadmin.utils.SharedPrefsUtils
 import com.ieeevit.gakko.ui.splash.SplashViewModelFactory
@@ -33,5 +34,6 @@ class ApptitudeAdmin : Application(), KodeinAware {
         bind() from provider { SplashViewModelFactory(instance()) }
         bind() from provider { AdvancedViewModelFactory(instance()) }
         bind() from provider { AdminExecutionViewModelFactory(instance()) }
+        bind() from provider { TeamDetailsViewModelFactory(instance()) }
     }
 }

@@ -7,7 +7,8 @@ data class Team(
     val name: String,
     val githubLink: String,
     val members: List<String>,
-    var membersDetails: List<Participant>
+    var membersDetails: List<Participant>,
+    var teamId : String
 ){
-    constructor():this("","","","","", emptyList(), emptyList())
+    constructor():this("","","","","", emptyList(), emptyList(),"")
 }

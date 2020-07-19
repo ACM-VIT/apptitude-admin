@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.benrostudios.apptitudeadmin.R
 import com.benrostudios.apptitudeadmin.ui.base.ScopedFragment
+import com.benrostudios.apptitudeadmin.ui.home.advanced.Advanced
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
@@ -39,7 +40,9 @@ class TeamDetails : BottomSheetDialogFragment(), KodeinAware {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this,viewModelFactory).get(TeamDetailsViewModel::class.java)
         // TODO: Use the ViewModel
-        fetchTeams("1553147172")
+        val args = arguments
+        val teamID = args?.getString("teamID")
+        fetchTeams(teamID!!)
         listener()
     }
 
@@ -48,7 +51,7 @@ class TeamDetails : BottomSheetDialogFragment(), KodeinAware {
     }
     private fun listener(){
         viewModel.teamDetails.observe(viewLifecycleOwner, Observer {
-            Log.d("TeamDetails", "$it")
+            Log.d("TeamDetails", "${it.membersDetails}")
         })
     }
 
