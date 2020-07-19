@@ -155,6 +155,7 @@ class Verification : ScopedFragment(), KodeinAware {
         viewModel.authResponse.observe(viewLifecycleOwner, Observer {
             if(it){
                 utils.saveMobile(phoneNumber)
+                utils.saveAdminLevel(2)
                 navController.navigate(R.id.action_verification_to_profile)
             }else{
                 Snackbar.make(otp_verify_btn,"Verification Failure",Snackbar.LENGTH_LONG).show()
