@@ -1,4 +1,4 @@
-package com.benrostudios.apptitudeadmin.ui.admin
+package com.benrostudios.apptitudeadmin.ui.admin.adminExecution
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
@@ -33,7 +33,8 @@ class AdminExecution : BottomSheetDialogFragment(), KodeinAware {
 
 
     companion object {
-        fun newInstance() = AdminExecution()
+        fun newInstance() =
+            AdminExecution()
     }
 
     private lateinit var viewModel: AdminExecutionViewModel

@@ -1,9 +1,8 @@
 package com.benrostudios.apptitudeadmin
 
 import android.app.Application
-import com.benrostudios.apptitudeadmin.data.models.Admin
 import com.benrostudios.apptitudeadmin.data.repository.*
-import com.benrostudios.apptitudeadmin.ui.admin.AdminExecutionViewModelFactory
+import com.benrostudios.apptitudeadmin.ui.admin.adminExecution.AdminExecutionViewModelFactory
 import com.benrostudios.apptitudeadmin.ui.auth.profile.ProfileViewModelFactory
 import com.benrostudios.apptitudeadmin.ui.auth.verification.VerificationViewModelFactory
 import com.benrostudios.apptitudeadmin.ui.home.advanced.AdvancedViewModelFactory
@@ -33,7 +32,11 @@ class ApptitudeAdmin : Application(), KodeinAware {
         bind() from provider { ProfileViewModelFactory(instance()) }
         bind() from provider { SplashViewModelFactory(instance()) }
         bind() from provider { AdvancedViewModelFactory(instance()) }
-        bind() from provider { AdminExecutionViewModelFactory(instance()) }
+        bind() from provider {
+            AdminExecutionViewModelFactory(
+                instance()
+            )
+        }
         bind() from provider { TeamDetailsViewModelFactory(instance()) }
     }
 }

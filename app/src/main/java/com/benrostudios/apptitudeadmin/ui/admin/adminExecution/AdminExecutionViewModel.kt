@@ -1,4 +1,4 @@
-package com.benrostudios.apptitudeadmin.ui.admin
+package com.benrostudios.apptitudeadmin.ui.admin.adminExecution
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

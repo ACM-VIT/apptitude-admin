@@ -2,10 +2,8 @@ package com.benrostudios.apptitudeadmin.ui.home.advanced
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,14 +13,13 @@ import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.benrostudios.apptitudeadmin.R
 import com.benrostudios.apptitudeadmin.data.models.AdminPanel
-import com.benrostudios.apptitudeadmin.ui.admin.AdminExecution
+import com.benrostudios.apptitudeadmin.ui.admin.adminExecution.AdminExecution
 import com.benrostudios.apptitudeadmin.ui.auth.AuthActivity
 import com.benrostudios.apptitudeadmin.ui.base.ScopedFragment
 import com.benrostudios.apptitudeadmin.utils.SharedPrefsUtils
 import com.benrostudios.apptitudeadmin.utils.errSnack
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.advanced_fragment.*
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
@@ -30,7 +27,6 @@ import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.closestKodein
 import org.kodein.di.generic.instance
 import java.text.SimpleDateFormat
-import kotlin.math.sign
 
 class Advanced : ScopedFragment(), KodeinAware {
 
@@ -136,7 +132,8 @@ class Advanced : ScopedFragment(), KodeinAware {
         val bundle = Bundle()
         bundle.putString(SELECTED_TITLE, name)
         bundle.putString(SELECTED_VALUE, value)
-        val bottomSheetFragment = AdminExecution()
+        val bottomSheetFragment =
+            AdminExecution()
         bottomSheetFragment.arguments = bundle
         bottomSheetFragment.show(
             activity?.supportFragmentManager!!,
