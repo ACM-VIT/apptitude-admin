@@ -31,6 +31,7 @@ class AdminExecution : BottomSheetDialogFragment(), KodeinAware {
     private lateinit var executionType: String
     private var longTime: Long = 0
 
+
     companion object {
         fun newInstance() = AdminExecution()
     }
@@ -80,9 +81,11 @@ class AdminExecution : BottomSheetDialogFragment(), KodeinAware {
         admin_execution_input.setText(value)
 
         admin_execution_button.setOnClickListener {
-            if (admin_execution_input.text.toString().isNotEmpty()) {
+            if (admin_execution_input.text.toString().isNotEmpty() && admin_execution_input.text.toString() != value) {
                 resultListener()
                 executeOperation(executionType)
+            }else{
+                admin_execution_input.error = "Please Update the Field"
             }
         }
     }

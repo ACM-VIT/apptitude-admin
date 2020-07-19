@@ -7,6 +7,7 @@
     android:background="@color/background">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/team_item_view_holder"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

@@ -37,7 +37,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="64dp"
         android:hint="Hint"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/admin_execution_button"
@@ -49,8 +49,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="1"
-            android:textColor="@color/white"
-            android:singleLine="true" />
+            android:singleLine="true"
+            android:textColor="@color/white" />
 
     </com.google.android.material.textfield.TextInputLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

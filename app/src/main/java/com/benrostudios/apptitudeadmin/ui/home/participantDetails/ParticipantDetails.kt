@@ -1,12 +1,18 @@
 package com.benrostudios.apptitudeadmin.ui.home.participantDetails
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context.CLIPBOARD_SERVICE
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.view.ContextMenu
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat.getSystemService
 import com.benrostudios.apptitudeadmin.R
 import com.benrostudios.apptitudeadmin.data.models.Participant
 import com.benrostudios.apptitudeadmin.ui.base.ScopedFragment
@@ -32,6 +38,7 @@ class ParticipantDetails : ScopedFragment(),KodeinAware {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val extras = arguments?.getSerializable("currentParticipant")
         if (extras != null) {
             currentParticipant = extras as Participant
@@ -44,7 +51,6 @@ class ParticipantDetails : ScopedFragment(),KodeinAware {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(ParticipantDetailsViewModel::class.java)
         populateUI()
-
     }
 
     private fun populateUI(){

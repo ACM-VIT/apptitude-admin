@@ -2,22 +2,29 @@ package com.benrostudios.apptitudeadmin.adapters
 
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.benrostudios.apptitudeadmin.R
 import com.benrostudios.apptitudeadmin.data.models.Participant
 import com.benrostudios.apptitudeadmin.data.models.Team
+import com.benrostudios.apptitudeadmin.ui.home.teamDetails.TeamDetails
+import com.benrostudios.apptitudeadmin.ui.home.teamDetails.TeamDetailsViewModel
 import kotlinx.android.synthetic.main.teams_item.view.*
 
-class TeamsAdapter(private var teamsList: List<Team>): RecyclerView.Adapter<TeamsAdapter.TeamsViewHolder>(),Filterable {
+class TeamsAdapter(private var teamsList: List<Team>,
+private val supportFragmentManager: FragmentManager): RecyclerView.Adapter<TeamsAdapter.TeamsViewHolder>(),Filterable {
 
+    private lateinit var mContext: Context
     private var mTeamsList: List<Team> = teamsList
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamsViewHolder {
+        mContext = parent.context
         val view = LayoutInflater.from(parent.context).inflate(R.layout.teams_item, parent, false)
         return TeamsViewHolder(view)
     }
@@ -28,6 +35,13 @@ class TeamsAdapter(private var teamsList: List<Team>): RecyclerView.Adapter<Team
     override fun onBindViewHolder(holder: TeamsViewHolder, position: Int) {
         holder.teamName.text = teamsList[position].name
         holder.members.text = "Members: ${teamsList[position].members.size}"
+        holder.teamCard.setOnClickListener {
+            val teamDetails = TeamDetails()
+            teamDetails.show(
+                supportFragmentManager,
+                teamDetails.tag
+            )
+        }
     }
 
     override fun getFilter(): Filter {
@@ -60,5 +74,6 @@ class TeamsAdapter(private var teamsList: List<Team>): RecyclerView.Adapter<Team
     class TeamsViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         val teamName: TextView = v.teams_item_name
         val members: TextView = v.teams_item_members
+        val teamCard = v.team_item_view_holder
     }
 }
