@@ -7,6 +7,7 @@ import com.benrostudios.apptitudeadmin.ui.admin.adminUpgrade.AdminUpgradeViewMod
 import com.benrostudios.apptitudeadmin.ui.auth.profile.ProfileViewModelFactory
 import com.benrostudios.apptitudeadmin.ui.auth.verification.VerificationViewModelFactory
 import com.benrostudios.apptitudeadmin.ui.home.advanced.AdvancedViewModelFactory
+import com.benrostudios.apptitudeadmin.ui.home.participantDetails.ParticipantDetailsViewModelFactory
 import com.benrostudios.apptitudeadmin.ui.home.participants.ParticipantViewModelFactory
 import com.benrostudios.apptitudeadmin.ui.home.teamDetails.TeamDetailsViewModelFactory
 import com.benrostudios.apptitudeadmin.ui.home.teams.TeamsViewModelFactory
@@ -37,5 +38,6 @@ class ApptitudeAdmin : Application(), KodeinAware {
         bind() from provider { AdminExecutionViewModelFactory(instance())}
         bind() from provider { TeamDetailsViewModelFactory(instance()) }
         bind() from provider { AdminUpgradeViewModelFactory(instance()) }
+        bind() from provider { ParticipantDetailsViewModelFactory(instance()) }
     }
 }

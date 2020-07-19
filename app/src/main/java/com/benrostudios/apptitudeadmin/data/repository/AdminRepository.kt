@@ -8,5 +8,7 @@ interface AdminRepository {
     val adminPanelResult: LiveData<AdminPanel>
     suspend fun <T : Any> adminExecution(option: String, value: T)
     val adminExecutionResult: LiveData<Boolean>
+    suspend fun adminRemoveParticipant(uid: String)
+    val adminRemovePanelResult : LiveData<Boolean>
 
 }

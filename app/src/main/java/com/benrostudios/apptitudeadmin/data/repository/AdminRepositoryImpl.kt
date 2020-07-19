@@ -13,6 +13,7 @@ class AdminRepositoryImpl : AdminRepository {
 
     private val _adminPanelResult = MutableLiveData<AdminPanel>()
     private val _adminExecutionResult = MutableLiveData<Boolean>()
+    private val _adminRemoveParticipantResult= MutableLiveData<Boolean>()
     private lateinit var databaseReference: DatabaseReference
 
     override suspend fun fetchAdminPanel() {
@@ -52,4 +53,16 @@ class AdminRepositoryImpl : AdminRepository {
 
     override val adminExecutionResult: LiveData<Boolean>
         get() = _adminExecutionResult
+
+    override suspend fun adminRemoveParticipant(uid: String) {
+        databaseReference = Firebase.database.getReference("/participants/$uid")
+        databaseReference.removeValue().addOnSuccessListener {
+            _adminRemoveParticipantResult.postValue(true)
+        }.addOnFailureListener {
+            _adminRemoveParticipantResult.postValue(false)
+        }
+    }
+
+    override val adminRemovePanelResult: LiveData<Boolean>
+        get() = _adminRemoveParticipantResult
 }

@@ -67,7 +67,7 @@ class FetchDetailsImpl : FetchDetails {
             }
 
         }
-        databaseReference.addListenerForSingleValueEvent(teamsFetcher)
+        databaseReference.addValueEventListener(teamsFetcher)
     }
 
     private fun participantFetcher(team: Team) {
