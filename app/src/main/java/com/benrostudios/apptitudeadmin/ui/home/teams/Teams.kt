@@ -53,7 +53,7 @@ class Teams : ScopedFragment(),KodeinAware {
         viewModel.fetchTeams()
         viewModel.teamsList.observe(viewLifecycleOwner, Observer {
             Log.d("teams","$it")
-            adapter = TeamsAdapter(it,activity?.supportFragmentManager!!)
+            adapter = TeamsAdapter(it)
             teams_recyclerView.adapter = adapter
         })
     }

@@ -9,8 +9,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Filter
 import android.widget.Filterable
+import android.widget.MediaController
 import android.widget.TextView
 import androidx.fragment.app.FragmentManager
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.benrostudios.apptitudeadmin.R
 import com.benrostudios.apptitudeadmin.data.models.Participant
@@ -20,11 +23,11 @@ import com.benrostudios.apptitudeadmin.ui.home.teamDetails.TeamDetailsViewModel
 import kotlinx.android.synthetic.main.participant_details_fragment.*
 import kotlinx.android.synthetic.main.teams_item.view.*
 
-class TeamsAdapter(private var teamsList: List<Team>,
-private val supportFragmentManager: FragmentManager): RecyclerView.Adapter<TeamsAdapter.TeamsViewHolder>(),Filterable {
+class TeamsAdapter(private var teamsList: List<Team>): RecyclerView.Adapter<TeamsAdapter.TeamsViewHolder>(),Filterable {
 
     private lateinit var mContext: Context
     private var mTeamsList: List<Team> = teamsList
+    private lateinit var navController: NavController
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamsViewHolder {
         mContext = parent.context
         val view = LayoutInflater.from(parent.context).inflate(R.layout.teams_item, parent, false)
@@ -40,12 +43,8 @@ private val supportFragmentManager: FragmentManager): RecyclerView.Adapter<Teams
         holder.teamCard.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("teamID",teamsList[position].teamId)
-            val teamDetails = TeamDetails()
-            teamDetails.arguments = bundle
-            teamDetails.show(
-                supportFragmentManager,
-                teamDetails.tag
-            )
+            navController = Navigation.findNavController(it)
+            navController.navigate(R.id.action_teams_to_teamDetails, bundle)
         }
     }
 
