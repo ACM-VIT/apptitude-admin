@@ -51,5 +51,9 @@
     <string name="medium">Medium :</string>
     <string name="hard">Hard :</string>
     <string name="github">Github :</string>
+    <string name="password">Password</string>
+    <string name="cur_admin_lvl">Your current admin level is :</string>
+    <string name="enter_admin_password">Enter Admin Password</string>
+    <string name="request_privilege">Request Privileges</string>
 
 </resources>
