@@ -46,5 +46,10 @@
 
     //Misc
     <string name="app_dev_details">App Developer Details</string>
+    <string name="team_members">Team Members</string>
+    <string name="easy">Easy :</string>
+    <string name="medium">Medium :</string>
+    <string name="hard">Hard :</string>
+    <string name="github">Github :</string>
 
 </resources>
