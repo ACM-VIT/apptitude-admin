@@ -18,13 +18,7 @@
         android:id="@+id/participants"
         android:name="com.benrostudios.apptitudeadmin.ui.home.participants.Participants"
         android:label="participants_fragment"
-        tools:layout="@layout/participants_fragment" >
-        <action
-            android:id="@+id/action_participants_to_participantDetails"
-            app:destination="@id/participantDetails"
-            app:launchSingleTop="true"
-            app:popUpToInclusive="false" />
-    </fragment>
+        tools:layout="@layout/participants_fragment" />
     <fragment
         android:id="@+id/teams"
         android:name="com.benrostudios.apptitudeadmin.ui.home.teams.Teams"

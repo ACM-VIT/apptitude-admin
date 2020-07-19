@@ -44,4 +44,7 @@
     <string name="update">Update</string>
     <string name="okay">Okay</string>
 
+    //Misc
+    <string name="app_dev_details">App Developer Details</string>
+
 </resources>

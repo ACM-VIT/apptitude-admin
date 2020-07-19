@@ -59,7 +59,7 @@ class Participants : ScopedFragment(), KodeinAware {
         viewModel.fetchParticipants()
         viewModel.participantsList.observe(viewLifecycleOwner, Observer {
             Log.d("Participants", "$it")
-            adapter = ParticipantAdapter(it.toMutableList())
+            adapter = ParticipantAdapter(it.toMutableList(), activity?.supportFragmentManager!!)
             participants_recyclerView.adapter = adapter
         })
     }
