@@ -10,6 +10,9 @@ fun View.hide(){
 fun View.show(){
     this.visibility = View.VISIBLE
 }
+fun View.gone(){
+    this.visibility = View.GONE
+}
 fun Context.shortToaster(message: String){
     Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }

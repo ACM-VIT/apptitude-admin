@@ -51,10 +51,13 @@ class FetchDetailsImpl : FetchDetails {
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (snapshot.exists()) {
-                    for(x in snapshot.children){
+                    for (x in snapshot.children) {
                         val team = x.getValue(Team::class.java)
-                        team?.let { it.teamId = x.key.toString() }
-                        team?.let { _teams.add(it) }
+                        team?.let {
+                            it.teamId = x.key.toString()
+                            _teams.add(it)
+                        }
+
                     }
                     _teamsList.postValue(_teams)
                 }
@@ -64,48 +67,52 @@ class FetchDetailsImpl : FetchDetails {
         databaseReference.addListenerForSingleValueEvent(teamsFetcher)
     }
 
-    private fun participantFetcher(team: Team){
-        val teamMember:MutableList<Participant> = mutableListOf()
+    private fun participantFetcher(team: Team) {
+        val teamMember: MutableList<Participant> = mutableListOf()
         val memberList = team.members.filter {
             it != "-"
         }
-        for(x in memberList){
+        for (x in memberList) {
             databaseReference = Firebase.database.getReference("/participants/$x")
-            val participantFetcher = object : ValueEventListener{
+            val participantFetcher = object : ValueEventListener {
                 override fun onCancelled(error: DatabaseError) {
                     TODO("Not yet implemented")
                 }
 
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    if(snapshot.exists()){
-                        Log.d("participant fetcher"," Exists")
+                    if (snapshot.exists()) {
+                        Log.d("participant fetcher", " Exists")
                         val member = snapshot.getValue(Participant::class.java)
-                        Log.d("lol"," $member")
+                        Log.d("lol", " $member")
                         member?.let { teamMember.add(it) }
                         team.membersDetails = teamMember
                         _teamDetails.postValue(team)
-                    }else{
-                        Log.d("participant fetcher","Doesn't Exists")
+                    } else {
+                        Log.d("participant fetcher", "Doesn't Exists")
                     }
                 }
 
             }
 
-            Log.d("participant fetcher","$teamMember , $x ")
+            Log.d("participant fetcher", "$teamMember , $x ")
             databaseReference.addValueEventListener(participantFetcher)
         }
     }
+
     override suspend fun fetchTeamDetails(teamId: String) {
         databaseReference = Firebase.database.getReference("teams/$teamId")
-        val teamDetailFetcher = object : ValueEventListener{
+        val teamDetailFetcher = object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 TODO("Not yet implemented")
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                if(snapshot.exists()){
+                if (snapshot.exists()) {
                     val teamDetails = snapshot.getValue(Team::class.java)
-                    teamDetails?.let { participantFetcher(it) }
+                    teamDetails?.let {
+                        teamDetails.teamId = teamId
+                        participantFetcher(it)
+                    }
                 }
             }
 

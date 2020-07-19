@@ -17,6 +17,8 @@ import com.benrostudios.apptitudeadmin.data.models.Team
 import com.benrostudios.apptitudeadmin.ui.base.ScopedFragment
 import com.benrostudios.apptitudeadmin.ui.home.advanced.Advanced
 import com.benrostudios.apptitudeadmin.ui.home.participantDetails.ParticipantDetailsViewModel
+import com.benrostudios.apptitudeadmin.utils.gone
+import com.benrostudios.apptitudeadmin.utils.show
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.team_details_fragment.*
 import kotlinx.coroutines.launch
@@ -67,6 +69,10 @@ class TeamDetails : BottomSheetDialogFragment(), KodeinAware {
 
     @SuppressLint("SetTextI18n")
     private fun populateUI(team: Team){
+        team_details_progress.gone()
+        team_recycler_progress.gone()
+        team_card_container.show()
+        team_members_recycler_view.show()
         team_members_recycler_view.adapter = adapter
         team_name.text = team.name
         if(team.easy == "-1"){
