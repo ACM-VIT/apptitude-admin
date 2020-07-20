@@ -14,7 +14,7 @@
     <string name="phoneNumber">Phone Number</string>
     <string name="phoneNumberDesc">We will send an OTP to this number for confirmation!</string>
     <string name="continue_btn">Continue</string>
-    
+
     //Verification
     <string name="verificationTitle">Verification</string>
     <string name="enter_otp">Please Enter the OTP you have received</string>
@@ -57,5 +57,7 @@
     <string name="request_privilege">Request Privileges</string>
     <string name="upgrade_admin_prev">Upgrade to a Privileged Admin</string>
     <string name="delete_btn">Delete Participant</string>
+    <string name="statistics_title">Statistics</string>
+    <string name="data_title">Data</string>
 
 </resources>

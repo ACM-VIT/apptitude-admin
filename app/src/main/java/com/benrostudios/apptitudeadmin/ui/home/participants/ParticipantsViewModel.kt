@@ -10,6 +10,8 @@ class ParticipantsViewModel(
 ) : ViewModel() {
 
     val participantsList =  MutableLiveData<List<Participant>>()
+    val teamsList
+        get() = fetchDetails.teamsList
     init {
         fetchDetails.participantList.observeForever {
             participantsList.postValue(it)
@@ -18,5 +20,9 @@ class ParticipantsViewModel(
 
     suspend fun fetchParticipants(){
         fetchDetails.fetchParticipants()
+    }
+
+    suspend fun fetchTeams() {
+        fetchDetails.fetchTeams()
     }
 }

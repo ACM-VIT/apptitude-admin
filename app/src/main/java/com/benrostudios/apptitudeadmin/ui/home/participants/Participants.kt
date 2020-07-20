@@ -12,8 +12,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.benrostudios.apptitudeadmin.R
 import com.benrostudios.apptitudeadmin.adapters.ParticipantAdapter
 import com.benrostudios.apptitudeadmin.ui.base.ScopedFragment
+import com.benrostudios.apptitudeadmin.ui.home.stats.StatsFragment
 import com.benrostudios.apptitudeadmin.utils.hide
+import com.benrostudios.apptitudeadmin.utils.shortToaster
 import com.benrostudios.apptitudeadmin.utils.show
+import kotlinx.android.synthetic.main.advanced_fragment.*
 import kotlinx.android.synthetic.main.participants_fragment.*
 import kotlinx.coroutines.launch
 import org.kodein.di.Kodein
@@ -26,6 +29,8 @@ class Participants : ScopedFragment(), KodeinAware {
     override val kodein: Kodein by closestKodein()
     private val viewModelFactory: ParticipantViewModelFactory by instance()
     private lateinit var adapter: ParticipantAdapter
+    private var participantCount = 0
+    private var teamsCount = 0
 
     companion object {
         fun newInstance() = Participants()
@@ -51,20 +56,40 @@ class Participants : ScopedFragment(), KodeinAware {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this, viewModelFactory).get(ParticipantsViewModel::class.java)
         fetchParticipants()
+        fetchTeams()
         participants_recyclerView.layoutManager = LinearLayoutManager(requireContext())
         participantSearchViewImplementation()
+        stats_fab.setOnClickListener {
+            requireContext().shortToaster("Please wait , data is loading ......")
+        }
     }
 
-    fun fetchParticipants() = launch {
+    private fun fetchParticipants() = launch {
         viewModel.fetchParticipants()
         viewModel.participantsList.observe(viewLifecycleOwner, Observer {
             Log.d("Participants", "$it")
             adapter = ParticipantAdapter(it.toMutableList(), activity?.supportFragmentManager!!)
+            participantCount = it.size
             participants_recyclerView.adapter = adapter
         })
     }
 
-    fun participantSearchViewImplementation(){
+    private fun fetchTeams() = launch {
+        viewModel.fetchTeams()
+        viewModel.teamsList.observe(viewLifecycleOwner, Observer {
+            teamsCount = it.size
+            stats_fab.setOnClickListener {
+                val statsFrag = StatsFragment()
+                val bundle = Bundle()
+                bundle.putString("participant_stats","$participantCount")
+                bundle.putString("teams_stats","$teamsCount")
+                statsFrag.arguments = bundle
+                statsFrag.show(activity?.supportFragmentManager!!, statsFrag.tag)
+            }
+        })
+    }
+
+    private fun participantSearchViewImplementation(){
         participant_searchView.onActionViewCollapsed()
         participant_searchView.setOnCloseListener {
             participant_title.show()

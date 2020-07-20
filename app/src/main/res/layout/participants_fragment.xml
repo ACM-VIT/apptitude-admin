@@ -51,4 +51,16 @@
             app:searchHintIcon="@drawable/ic_baseline_search_24"
             app:showAsAction="always" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/stats_fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp"
+        app:backgroundTint="@color/white"
+        android:clickable="true"
+        android:src="@drawable/ic_baseline_data_usage_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
