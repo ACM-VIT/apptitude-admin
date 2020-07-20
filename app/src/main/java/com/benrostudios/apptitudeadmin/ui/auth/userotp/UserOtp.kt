@@ -37,6 +37,7 @@ class UserOtp : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(UserOtpViewModel::class.java)
+        phone_input.setSelection(3)
         phone_cont_btn.setOnClickListener {
             if(phone_input.text?.isValidMobile() == true){
                 val bundle = Bundle()

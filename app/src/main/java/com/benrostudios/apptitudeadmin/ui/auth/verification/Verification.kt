@@ -72,8 +72,8 @@ class Verification : ScopedFragment(), KodeinAware {
             initiateSignIn(phoneNumber)
         }
         otp_verify_btn.setOnClickListener {
+            getResponse()
             if (verificationToken != null) {
-                getResponse()
                 verifyPhoneNumberWithCode(otp_input.text.toString())
                 verfication_progress.show()
             }
@@ -155,19 +155,9 @@ class Verification : ScopedFragment(), KodeinAware {
     private fun getResponse() = launch {
         viewModel.authResponse.observe(viewLifecycleOwner, Observer {
             if(it){
-                viewModel.userChecker.observe(viewLifecycleOwner, Observer { user ->
-                    if(user){
-                        utils.saveMobile(phoneNumber)
-                        utils.saveAdminLevel(2)
-                        val intent = Intent(requireActivity(),MainActivity::class.java)
-                        startActivity(intent)
-                        activity?.finish()
-                    }else{
-                        utils.saveMobile(phoneNumber)
-                        utils.saveAdminLevel(2)
-                        navController.navigate(R.id.action_verification_to_profile)
-                    }
-                })
+                utils.saveMobile(phoneNumber)
+                utils.saveAdminLevel(2)
+                navController.navigate(R.id.action_verification_to_profile)
 
             }else{
                 Snackbar.make(otp_verify_btn,"Verification Failure",Snackbar.LENGTH_LONG).show()
