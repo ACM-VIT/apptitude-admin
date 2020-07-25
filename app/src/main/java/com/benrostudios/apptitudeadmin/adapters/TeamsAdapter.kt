@@ -4,6 +4,7 @@ package com.benrostudios.apptitudeadmin.adapters
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,7 +40,7 @@ class TeamsAdapter(private var teamsList: List<Team>): RecyclerView.Adapter<Team
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: TeamsViewHolder, position: Int) {
         holder.teamName.text = teamsList[position].name
-        holder.members.text = "Members: ${teamsList[position].members.size}"
+        holder.members.text = if(teamsList[position].members.contains("-")) "Members: 1" else "Members: 2"
         holder.teamCard.setOnClickListener {
             val bundle = Bundle()
             bundle.putString("teamID",teamsList[position].teamId)
@@ -52,21 +53,27 @@ class TeamsAdapter(private var teamsList: List<Team>): RecyclerView.Adapter<Team
         return customFilter
     }
 
-    var customFilter: Filter = object : Filter() {
+    private var customFilter: Filter = object : Filter() {
+        var tempList: MutableList<Team> = mutableListOf()
         override fun performFiltering(constraint: CharSequence?): FilterResults {
             val queryString = constraint?.toString()?.toLowerCase()
 
             val filterResults = Filter.FilterResults()
             filterResults.values = if (queryString == null || queryString.isEmpty())
                 mTeamsList
-            else
+            else {
                 teamsList.filter {
                     it.name.toLowerCase().contains(queryString) ||
                             it.githubLink.toLowerCase().contains(queryString) ||
                             it.members.contains(queryString)
+
                 }
+            }
             return filterResults
         }
+
+
+
 
         override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
             teamsList = results?.values as List<Team>

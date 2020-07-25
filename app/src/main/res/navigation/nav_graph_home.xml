@@ -26,7 +26,8 @@
         tools:layout="@layout/teams_fragment" >
         <action
             android:id="@+id/action_teams_to_teamDetails"
-            app:destination="@id/teamDetails" />
+            app:destination="@id/teamDetails"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/participantDetails"

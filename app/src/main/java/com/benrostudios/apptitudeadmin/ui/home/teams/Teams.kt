@@ -1,8 +1,8 @@
 package com.benrostudios.apptitudeadmin.ui.home.teams
 
 
-import android.content.Context
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -32,6 +32,12 @@ class Teams : ScopedFragment(),KodeinAware {
     }
 
     private lateinit var viewModel: TeamsViewModel
+    override fun onStart() {
+        super.onStart()
+        teams_searchView.setQuery("",false)
+        teams_searchView.setIconifiedByDefault(true)
+        teams_searchView.isIconified = true
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,6 +55,9 @@ class Teams : ScopedFragment(),KodeinAware {
         teams_recyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
 
+
+
+
     private fun fetchTeams() = launch {
         viewModel.fetchTeams()
         viewModel.teamsList.observe(viewLifecycleOwner, Observer {
@@ -60,7 +69,7 @@ class Teams : ScopedFragment(),KodeinAware {
 
 
 
-    fun teamsSearchViewImplementation(){
+    private fun teamsSearchViewImplementation(){
         teams_searchView.onActionViewCollapsed()
         teams_searchView.setOnCloseListener {
             teams_title.show()
