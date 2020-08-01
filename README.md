@@ -2,10 +2,10 @@
 **Apptitude Admin** is an app that was created to ensure smooth functioning of Apptitude 2020 conducted by @ACM-VIT . This app relieves an admin's job to go log into Firebase for every nitty-gritty detail. A one stop shop for admin to control the whole event! From Participant Details to making the event go live. This app has a security layer and prompts for a root password to modify any paramteres of the event.
 
 ## Screenshots
-![Gakko Screenshots](assets/screenshot.png)
+![Apptitude Admin Screenshots](assets/screenshot.png)
 
 ## How is this app built?
-This app written in **Kotlin** that follows **MVVM architecture** and is used with **Android Architecture Components**. **Koin** is used for dependency injection.
+This app written in **Kotlin** that follows **MVVM architecture** and is used with **Android Architecture Components**. **Kodein** is used for dependency injection.
 
 ## Features
 * Simply invite students to join a class through their phone numbers.
@@ -23,7 +23,7 @@ This app written in **Kotlin** that follows **MVVM architecture** and is used wi
 
 ## Other libraries/services used
 * **Gson** - For converting JSON to POJO and vice versa.
-* **Koin** - For easy Dependency Injection.
+* **Kodein** - For easy Dependency Injection.
 * **Firebase** - For fetch and update details regarding the event.
 * **Firebase KTX** - To make easy use of Firebase in the codebase. 
 
