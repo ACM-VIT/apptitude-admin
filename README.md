@@ -8,11 +8,12 @@
 This app written in **Kotlin** that follows **MVVM architecture** and is used with **Android Architecture Components**. **Kodein** is used for dependency injection.
 
 ## Features
-* Simply invite students to join a class through their phone numbers.
-* Posting options include questions, assignments, or announcements.
-* It helps to keep students well organized with the To-Do feature.
-* Includes a feature to converse in threads to overcome spamming.
-* Private messaging feature to communicate with anyone anytime.
+* Get list of all participant and thier details.
+* Get list of all the teams that have been registered.
+* Get participant details of the teams and other details such as the problem statements generated for the team.
+* Send Notifications right from the admin app.
+* Modify all parameters such as discord link , submission time , event start and much more! [privileged admins only]
+* Managed permissions , not all admins are previliged admins , privileged admins have special access.
 
 ## Andorid Components Used
 * **Android Lifecycle Components** - Used to implement the expose and observe pattern of LiveData.
